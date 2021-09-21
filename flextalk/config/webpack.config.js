@@ -26,8 +26,9 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-
+const banner = require('./banner.js');
 const postcssNormalize = require('postcss-normalize');
+const { DefinePlugin } = require('webpack');
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -558,6 +559,11 @@ module.exports = function (webpackEnv) {
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.
+      new webpack.BannerPlugin(banner),
+      new webpack.DefinePlugin({
+        "api.url": process.env.NODE_ENV === 'development' ? 'http://localhost:9000' : ''
+      }),
+
       new HtmlWebpackPlugin(
         Object.assign(
           {},
