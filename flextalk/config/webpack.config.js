@@ -561,7 +561,7 @@ module.exports = function (webpackEnv) {
       // Generates an `index.html` file with the <script> injected.
       new webpack.BannerPlugin(banner),
       new webpack.DefinePlugin({
-        "api.url": process.env.NODE_ENV === 'development' ? 'http://localhost:9000' : ''
+        domainUrl: process.env.NODE_ENV === 'development' ? JSON.stringify('http://localhost:9000') : JSON.stringify('')
       }),
 
       new HtmlWebpackPlugin(

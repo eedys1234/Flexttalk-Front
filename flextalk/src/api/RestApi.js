@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from '../utils/token';
 
 const instance = axios.create({
-    baseURL: api.url,
+    baseURL: domainUrl,
     timeout: 30000,
     withCredentials: true,
 });
