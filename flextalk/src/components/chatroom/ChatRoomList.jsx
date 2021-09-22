@@ -1,14 +1,13 @@
 import ChatRoomItem from './ChatRoomItem';
 import { go, lmap } from '../../utils/fx';
-
+import styled from 'styled-components';
 const ChatRoomList = ({rooms}) => (
 
-    <ul class="chatgroup_list">
-        {
-            go(rooms, lmap(createChatRoomItem)) 
-        }
-    </ul>
-
+    <StyledChatRoomList>
+    {
+        // go(rooms, lmap(createChatRoomItem)) 
+    }
+    </StyledChatRoomList>
 );
 
 const createChatRoomItem = ({room}) => {
@@ -16,5 +15,9 @@ const createChatRoomItem = ({room}) => {
                 room={room}
             />
 }
+
+const StyledChatRoomList = styled.ul `
+    border-bottom: 1px solid #e5e5e5;
+`
 
 export default ChatRoomList;

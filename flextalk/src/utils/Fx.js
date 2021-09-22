@@ -20,7 +20,7 @@ export const l_map = curry(function* (f, iter) {
 export const map = curry((f, iter) => {
     return go(
         iter, 
-        lmap(f), 
+        l_map(f), 
         takeAll);    
 })
 
@@ -35,7 +35,7 @@ export const l_filter = curry((f, iter) => {
 export const filter = curry((f, iter) => {
     return go(
         iter,
-        lfilter(f),
+        l_filter(f),
         takeAll
     );
 });

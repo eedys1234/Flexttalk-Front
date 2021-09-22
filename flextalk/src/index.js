@@ -6,16 +6,18 @@ import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import RootReducer from './redux/reducers/RootReducer.js';
 import logger from 'redux-logger';
+import rootSaga from './redux/sagas/RootSaga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 const sagaMiddleware = createSagaMiddleware();
-
 const enhancer = process.env.NODE_ENV === "production" 
               ? compose(applyMiddleware(sagaMiddleware))
               : composeWithDevTools(applyMiddleware(sagaMiddleware, logger));
 
 const store =  createStore(RootReducer, enhancer);
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

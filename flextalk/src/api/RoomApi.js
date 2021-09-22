@@ -9,7 +9,7 @@ export default class RoomApi {
     }
 
     //채팅방 삭제
-    static deleteRoom = ({roomId}) => {
+    static removeRoom = ({roomId}) => {
         const url = `/api/v1/rooms/${roomId}`;
         return remove(`${url}`);
     }

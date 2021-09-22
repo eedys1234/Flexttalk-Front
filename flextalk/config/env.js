@@ -100,6 +100,7 @@ function getClientEnvironment(publicUrl) {
     }, {}),
   };
 
+  
   return { raw, stringified };
 }
 

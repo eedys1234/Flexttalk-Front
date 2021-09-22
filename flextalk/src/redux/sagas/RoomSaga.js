@@ -1,33 +1,34 @@
-import { all, fork, put, call, takeLatest } from 'redux-saga/effects';
+import { all, fork, takeLatest } from 'redux-saga/effects';
 
+import { create, remove, list } from '../reducers/RoomReducer';
 import RoomApi from '../../api/RoomApi'
-import { createSaga } from '../../utils/SagaUtil';
+import { createSaga, createActions } from '../../utils/SagaUtil';
 
-const createRoomAction = (isStatus) => isStatus === 0 ? "CREATE_ROOM_SUCCESS" : "CREATE_ROOM_FAILURE";
-const createRoomRequest = createSaga(createRoomAction, RoomApi.createRoom);
+const createRoomActions = createActions(create.type);
+const createRoomRequest = createSaga(createRoomActions, RoomApi.createRoom);
 
 function* watchCreateRoom() {
-    yield takeLatest(createRoomAction, RoomApi.createRoom)
+    yield takeLatest(create.type, createRoomRequest)
 }
 
-const deleteRoomAction = (isStatus) => isStatus === 0 ? "DELETE_ROOM_SUCCESS" : "DELETE_ROOM_FAILURE";
-const deleteRoomRequest = createSaga(deleteRoomAction, RoomApi.deleteRoom);
+const removeRoomActions = createActions(remove.type);
+const removeRoomRequest = createSaga(removeRoomActions, RoomApi.removeRoom);
 
-function* watchDeleteRoom() {
-    yield takeLatest(deleteRoomAction, RoomApi.deleteRoom);
+function* watchRemoveRoom() {
+    yield takeLatest(remove.type, removeRoomRequest);
 }
 
-const listAction = (isStatus) => isStatus === 0 ? "LIST_SUCCESS" : "LIST_FAILURE";
-const listRequest = createSaga(listAction, RoomApi.list);
+const listActions = createActions(list.type);
+const listRequest = createSaga(listActions, RoomApi.list);
 
 function* watchList() {
-    yield takeLatest(listAction, RoomApi.list);
+    yield takeLatest(list.type, listRequest);
 }
 
 export default function* roomSaga() {
     yield all([
         fork(watchCreateRoom),
-        fork(watchDeleteRoom),
+        fork(watchRemoveRoom),
         fork(watchList),
     ])
 }

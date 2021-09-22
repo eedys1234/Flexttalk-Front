@@ -1,4 +1,4 @@
-import { AuthHeader, AuthType } from "../constants/AuthConstants"
+import { AuthHeader, AuthType } from "../constants/AuthConstants.js"
 import cookie from "react-cookies";
 
 export const getToken = (tokenName = 'token') => {

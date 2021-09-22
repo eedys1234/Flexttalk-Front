@@ -6,6 +6,5 @@ import RoomSaga from './RoomSaga.js';
 import UserSaga from './UserSaga.js';
 
 export default function* rootSaga() {
-    yield all([fork(UserSaga, RoomSaga, ParticipantSaga, MessageSaga)]);
-
+    yield all([fork(RoomSaga)]);
 }

@@ -10,19 +10,42 @@ const roomSlice = createSlice({
     name, 
     initialState,
     reducers : {
-        create(state, action) {
+        
+        create(state) {
+        },
+
+        createSuccess(state, action) {
             state.rooms.push(...action.payload);
         },
+
+        createFailure(state) {
+            
+        },
         
-        leave(state, action) {
+        remove(state) {
+        },
+
+        removeSuccess(state, action) {
+            //삭제 기능 개발필요
+        },
+
+        removeFailure(state) {
 
         },
 
         list(state) {
-            state.rooms.push(...action.payload);
-        }
+            
+        },
+
+        listSuccess(state, action) {
+            state.rooms.push(...action.data);
+        },
+
+        listFailure(state) {
+
+        },
     }
 })
 
-export const { create, leave, list } = roomSlice.actions;
+export const { create, remove, list, listSuccess, listFailure } = roomSlice.actions;
 export default roomSlice.reducer;

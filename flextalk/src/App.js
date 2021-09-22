@@ -1,10 +1,10 @@
-import SearchBox  from "./components/cmmn/SearchBox";
 
-
+import CMSnb from "./views/communication/CMSnb";
 
 function App() {
   return (
     <div className="App">
+      <CMSnb />
     </div>
   );
 }

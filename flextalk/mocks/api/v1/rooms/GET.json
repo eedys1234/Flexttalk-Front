@@ -1,0 +1,55 @@
+{
+    "status" : 200,
+    "result" :
+        [
+            {
+                "room_id": "1",
+                "room_name": "문자서비스 협업",
+                "room_type": "GROUP",
+                "room_limit_count": 1000,
+                "is_alarm": true,
+                "is_bookmark": false,
+                "is_owner": false
+            },
+        
+            {
+                "room_id": "2",
+                "room_name": "팩스서비스 협업",
+                "room_type": "GROUP",
+                "room_limit_count": 1000,
+                "is_alarm": true,
+                "is_bookmark": false,
+                "is_owner": false
+            },
+
+            {
+                "room_id": "3",
+                "room_name": "차석기",
+                "room_type": "NORMAL",
+                "room_limit_count": 2,
+                "is_alarm": true,
+                "is_bookmark": false,
+                "is_owner": true
+            },
+
+            {
+                "room_id": "4",
+                "room_name": "이해준",
+                "room_type": "NORMAL",
+                "room_limit_count": 2,
+                "is_alarm": true,
+                "is_bookmark": false,
+                "is_owner": false
+            },
+
+            {
+                "room_id": "5",
+                "room_name": "김창민",
+                "room_type": "NORMAL",
+                "room_limit_count": 2,
+                "is_alarm": true,
+                "is_bookmark": false,
+                "is_owner": false
+            }
+        ]
+    }

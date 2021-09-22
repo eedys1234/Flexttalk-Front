@@ -1,3 +1,3 @@
 export const AuthHeader = 'Authorization';
-export const AutyType = 'Bearer';
+export const AuthType = 'Bearer';
  

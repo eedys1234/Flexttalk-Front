@@ -94,6 +94,7 @@ module.exports = function (webpackEnv) {
   // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
   // Get environment variables to inject into our app.
   const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
+  const stringified = env.stringified;
 
   const shouldUseReactRefresh = env.raw.FAST_REFRESH;
 
@@ -560,9 +561,6 @@ module.exports = function (webpackEnv) {
     plugins: [
       // Generates an `index.html` file with the <script> injected.
       new webpack.BannerPlugin(banner),
-      new webpack.DefinePlugin({
-        domainUrl: process.env.NODE_ENV === 'development' ? JSON.stringify('http://localhost:9000') : JSON.stringify('')
-      }),
 
       new HtmlWebpackPlugin(
         Object.assign(
@@ -609,7 +607,10 @@ module.exports = function (webpackEnv) {
       // It is absolutely essential that NODE_ENV is set to production
       // during a production build.
       // Otherwise React will be compiled in the very slow development mode.
-      new webpack.DefinePlugin(env.stringified),
+      new webpack.DefinePlugin({
+        ...stringified, 
+        domainUrl: process.env.NODE_ENV === 'development' ? JSON.stringify('http://localhost:9000') : JSON.stringify('http://localhost:9000')
+      }),
       // This is necessary to emit hot updates (CSS and Fast Refresh):
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
       // Experimental hot reloading for React .

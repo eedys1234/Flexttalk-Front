@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { getToken } from '../utils/token';
+import { getToken } from '../utils/Token.js';
 
 const instance = axios.create({
-    baseURL: domainUrl,
+    baseURL: JSON.stringify("http://localhost:9000"),
     timeout: 30000,
     withCredentials: true,
 });
