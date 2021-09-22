@@ -1,0 +1,19 @@
+export const OK = 200;
+export const CREATED = 201;
+export const NO_CONTENT = 204;
+export const NOT_MODIFIED = 304;
+
+export const BAD_REQUEST = 400;
+export const UNAUTHORIZED = 401;
+export const FORBBIDEN = 403;
+export const NOT_FOUND = 404;
+export const METHOD_NOT_ALLOWED = 405;
+export const CONFLICT = 409;
+
+export const INTERNAL_SERVER_ERROR = 500;
+export const BAD_GATEWAY = 502;
+export const GATEWAY_TIMEOUT = 504;
+
+export const SUCCESS = [OK, CREATED, NO_CONTENT, NOT_MODIFIED];
+export const FAILURE = [BAD_REQUEST, UNAUTHORIZED, FORBBIDEN, NOT_FOUND, METHOD_NOT_ALLOWED, CONFLICT, INTERNAL_SERVER_ERROR,
+BAD_GATEWAY, GATEWAY_TIMEOUT]; 

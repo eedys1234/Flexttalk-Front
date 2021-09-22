@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { getToken } from '../utils/Token.js';
+import ApiError from './ApiError.js';
+import { SUCCESS } from './HttpStatus.js';
 
 const instance = axios.create({
     baseURL: JSON.stringify("http://localhost:9000"),
@@ -7,43 +9,43 @@ const instance = axios.create({
     withCredentials: true,
 });
 
-const OK = 200;
-const CREATED = 201;
-const NO_CONTENT = 204;
-const NOT_MODIFIED = 304;
+const isComplete = status => {
+    return SUCCESS.indexOf(status) > -1;
+}
 
-const BAD_REQUEST = 400;
-const UNAUTHORIZED = 401;
-const FORBBIDEN = 403;
-const NOT_FOUND = 404;
-const METHOD_NOT_ALLOWED = 405;
-const CONFLICT = 409;
-
-const INTERNAL_SERVER_ERROR = 500;
-const BAD_GATEWAY = 502;
-const GATEWAY_TIMEOUT = 504;
-
-export const SUCCESS = [OK, CREATED, NO_CONTENT, NOT_MODIFIED];
-export const FAILURE = [BAD_REQUEST, UNAUTHORIZED, FORBBIDEN, NOT_FOUND, METHOD_NOT_ALLOWED, CONFLICT, INTERNAL_SERVER_ERROR,
-BAD_GATEWAY, GATEWAY_TIMEOUT]; 
+const createApiError = (status, data) => {
+    return new ApiError(status, data, `Api 호출 실패 : ${status}`);
+}
 
 export const get = url => {
-    instance.defaults.headers.common = getToken();
-    return axios.get(url);
+    return new Promise((resolve, reject) => {
+        instance.defaults.headers.common = getToken();
+        axios.get(url)
+        .then(({ data, status }) => isComplete(status) ? resolve(data) : reject(createApiError(status, data)))
+    }) 
 }
 
 export const post = (url, param) => {
-    instance.defaults.headers.common = getToken();
-    return axios.post(url, param);
+    return new Promise((resolve, reject) => {
+        instance.defaults.headers.common = getToken();
+        axios.post(url, param)
+        .then(({ data, status }) => isComplete(status) ? resolve(data) : reject(createApiError(status, data)))
+    });
 }
 
 export const put = (url, param) => {
-    instance.defaults.headers.common = getToken();
-    return axios.put(url, param);
+    return new Promise((resolve, reject) => {
+        instance.defaults.headers.common = getToken();
+        axios.put(url, param)
+        .then(({ data, status }) => isComplete(status) ? resolve(data) : reject(createApiError(status, data)))
+    });
 }
 
 export const remove = url => {
-    instance.defaults.headers.common = getToken();
-    return axios.delete(url);
+    return new Promise((resolve, reject) => {
+        instance.defaults.headers.common = getToken();
+        axios.delete(url)
+        .then(({ data, status }) => isComplete(status) ? resolve(data) : reject(createApiError(status, data)))    
+    });
 }
 
