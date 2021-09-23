@@ -62,7 +62,7 @@ const StyledNameBox = styled.div `
 
 const StyledNameBoxBtn = styled.button `
     display: inline-block;
-    margin-right: 6px;
+    margin-right: 10px;
     font-size: 14px;
     font-weight: 600;
     position: relative;

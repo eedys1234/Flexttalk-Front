@@ -13,7 +13,9 @@ const ChatContainer = () => {
                 ></RoomMyMessageArea>
                 <RoomMessageDate></RoomMessageDate>
                 <RoomMessageArea></RoomMessageArea>
-                <RoomMessageArea></RoomMessageArea>
+                <RoomMessageArea
+                    isFile={true}
+                ></RoomMessageArea>
             </StyledChatContainer>
     )
 }

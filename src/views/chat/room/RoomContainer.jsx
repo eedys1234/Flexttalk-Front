@@ -1,6 +1,6 @@
 
 import ChatContainer from "./chat/ChatContainer";
-import MessageInputArea from "./chat/MessageInputArea";
+import InputMessageArea from "./chat/InputMessageArea";
 import MoveRecentlyMessageArea from "./chat/MoveRecentlyMessageArea";
 
 import styled from "styled-components";
@@ -10,7 +10,7 @@ const RoomContainer = () => {
         <StyledRoomContainer>
             <ChatContainer></ChatContainer>
             <MoveRecentlyMessageArea></MoveRecentlyMessageArea>
-            <MessageInputArea></MessageInputArea>
+            <InputMessageArea></InputMessageArea>
         </StyledRoomContainer>
     );
 }

@@ -3,7 +3,7 @@ import RoomMessage from "./RoomMessage";
 
 import styled from "styled-components";
 
-const RoomMessageArea = ({messageOwner = false}) => {
+const RoomMessageArea = ({messageOwner = false, isFile}) => {
 
     return (
         <StyledRoomMessageArea>  
@@ -12,7 +12,9 @@ const RoomMessageArea = ({messageOwner = false}) => {
                     <span className="sp_ic ic_profile" />
                 </StyledProfileImg>
             </StyledProfileBtn>          
-            <RoomMessage>
+            <RoomMessage
+                isFile={isFile}
+            >
             </RoomMessage>
         </StyledRoomMessageArea>
     );
