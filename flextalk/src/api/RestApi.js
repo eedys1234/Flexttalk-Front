@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { getToken } from '../utils/Token.js';
-import ApiError from './ApiError.js';
 import { SUCCESS } from './HttpStatus.js';
+import ApiError from './ApiError.js';
 
 const instance = axios.create({
-    baseURL: JSON.stringify("http://localhost:9000"),
+    baseURL: process.env.domainUrl,
     timeout: 30000,
     withCredentials: true,
 });
@@ -17,35 +17,40 @@ const createApiError = (status, data) => {
     return new ApiError(status, data, `Api 호출 실패 : ${status}`);
 }
 
-export const get = url => {
+const returnResult = (status, data, resolve, reject) => {
+    isComplete(status) ? resolve(data) : reject(createApiError(status, data));
+}
+
+const tokenDecorator = f => (url, params) => {
+    instance.defaults.headers.common = getToken();
+    return params ? f(url, params) : f(url);
+};
+
+export const get = tokenDecorator(url => {
     return new Promise((resolve, reject) => {
-        instance.defaults.headers.common = getToken();
         axios.get(url)
-        .then(({ data, status }) => isComplete(status) ? resolve(data) : reject(createApiError(status, data)))
+        .then(({ data, status }) => returnResult(status, data, resolve, reject));
     }) 
-}
+});
 
-export const post = (url, param) => {
+export const post = tokenDecorator((url, param) => {
     return new Promise((resolve, reject) => {
-        instance.defaults.headers.common = getToken();
         axios.post(url, param)
-        .then(({ data, status }) => isComplete(status) ? resolve(data) : reject(createApiError(status, data)))
+        .then(({ data, status }) => returnResult(status, data, resolve, reject));
     });
-}
+});
 
-export const put = (url, param) => {
+export const put = tokenDecorator((url, param) => {
     return new Promise((resolve, reject) => {
-        instance.defaults.headers.common = getToken();
         axios.put(url, param)
-        .then(({ data, status }) => isComplete(status) ? resolve(data) : reject(createApiError(status, data)))
+        .then(({ data, status }) => returnResult(status, data, resolve, reject));
     });
-}
+});
 
-export const remove = url => {
+export const remove = tokenDecorator(url => {
     return new Promise((resolve, reject) => {
-        instance.defaults.headers.common = getToken();
         axios.delete(url)
-        .then(({ data, status }) => isComplete(status) ? resolve(data) : reject(createApiError(status, data)))    
+        .then(({ data, status }) => returnResult(status, data, resolve, reject));
     });
-}
+});
 

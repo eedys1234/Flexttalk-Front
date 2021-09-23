@@ -17,7 +17,7 @@ export default class RoomApi {
     //채팅방 리스트 가져오기
     static list = () => {
         const url = `/api/v1/rooms`;
-        return get(`${url}`);
+        return get(`${url}`, { user_id: 1});
     }
 
 };

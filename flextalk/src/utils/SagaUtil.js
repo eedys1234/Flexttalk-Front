@@ -1,6 +1,4 @@
 import { call, put } from 'redux-saga/effects';
-import { SUCCESS, FAILURE } from '../api/HttpStatus';
-import { get } from '../api/RestApi';
 
 export const createActions = (type) => () => { 
     return {
@@ -16,7 +14,7 @@ export const createSaga = (actionCreateFunc, callApi) => {
     return function* (action) {
 
         try {
-            const { result, status } = yield call(callApi, action.payload);
+            const { result } = yield call(callApi, action.payload);
             yield put({ type: success, data: result })
     
         } catch(e) {

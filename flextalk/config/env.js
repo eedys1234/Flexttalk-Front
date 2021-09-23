@@ -99,8 +99,8 @@ function getClientEnvironment(publicUrl) {
       return env;
     }, {}),
   };
+  stringified['process.env'].domainUrl = process.env.NODE_ENV === 'production' ? JSON.stringify('http://localhost:9000') : JSON.stringify('http://localhost:9000');
 
-  
   return { raw, stringified };
 }
 
