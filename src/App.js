@@ -1,11 +1,9 @@
 
-import CMSnb from "./views/communication/CMSnb";
+import ChatMain from "./views/chat/ChatMain";
 
 function App() {
   return (
-    <div className="App">
-      <CMSnb />
-    </div>
+      <ChatMain />
   );
 }
 

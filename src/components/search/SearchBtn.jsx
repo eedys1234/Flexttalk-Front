@@ -13,6 +13,15 @@ const SearchBtn = ({onClick, onKeyUp}) => (
 
 const StyledSearchBtn = styled.button `
     display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 27px;
+    height: 27px;
+    border: 0;
+    background: 0 0;
+    cursor: pointer;
+    outline: 0;
 `
 
 const StyledICSearch = styled.span `

@@ -1,5 +1,6 @@
+import SearchBox from '../../../components/search/SearchBox';
+
 import styled from 'styled-components';
-import SearchBox from '../../components/cmmn/SearchBox';
 
 const CMSnbHeader = () => (
     <StyledCMSnbHeader>

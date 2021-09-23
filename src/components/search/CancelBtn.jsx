@@ -11,6 +11,15 @@ const CancelBtn = ({onClick}) => (
 
 const StyledCancelBtn = styled.button `
     display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 27px;
+    height: 27px;
+    border: 0;
+    background: 0 0;
+    cursor: pointer;
+    outline: 0;
 `
 
 const StyledIcCancel = styled.span `

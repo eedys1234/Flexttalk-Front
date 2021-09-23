@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
-const ChatRoomItem = ({selected, roomName, participantsCount}) => (
+const DropDownItem = ({item}) => {
 
-    <StyledChatGroupBox
-        selected={selected}
-    >
-        <StyledChatGroupBoxText>
+    const { selected, name, count } = item;
+
+    return(
+        <StyledGroupBox
+            selected={selected}
+        >
+        <StyledGroupBoxText>
             <div className="img_thum">
                 <div className="pic_wrap">
                     <span className="use_member"></span>
@@ -14,11 +17,11 @@ const ChatRoomItem = ({selected, roomName, participantsCount}) => (
                     <span className="use_member"></span>
                 </div>
             </div>
-            <StyledChatGroupBoxTextEllipse>
-                <StyledChatGroupBoxTextEllipseLeft>{roomName}</StyledChatGroupBoxTextEllipseLeft>
-                <StyledChatGroupBoxTextEllipseRight>{participantsCount}</StyledChatGroupBoxTextEllipseRight>
-            </StyledChatGroupBoxTextEllipse>
-        </StyledChatGroupBoxText>
+            <StyledGroupBoxTextEllipse>
+                <StyledGroupBoxTextEllipseLeft>{name}</StyledGroupBoxTextEllipseLeft>
+                <StyledGroupBoxTextEllipseRight>{count}</StyledGroupBoxTextEllipseRight>
+            </StyledGroupBoxTextEllipse>
+        </StyledGroupBoxText>
         <StyledBookMarkBtn>
             <StyledBookMarkIc/>
         </StyledBookMarkBtn>
@@ -28,15 +31,18 @@ const ChatRoomItem = ({selected, roomName, participantsCount}) => (
             </StyledAlarmBtn>
         </StyledAlarmBox>
 
-    </StyledChatGroupBox>
-)
+    </StyledGroupBox>
 
-const StyledChatGroupBox = styled.li `
+    )
+}
+
+const StyledGroupBox = styled.li `
     position: relative;
     height: 48px;
     line-height: 48px;
     padding: 0 50px 0 33px;
     font-size: 13px;
+    cursor: pointer;
     
     ${(props) => props.selected ? 
     `
@@ -52,13 +58,13 @@ const StyledChatGroupBox = styled.li `
     : ''}   
 `
 
-const StyledChatGroupBoxText = styled.a `
+const StyledGroupBoxText = styled.a `
     display: block;
     height: 100%;
     padding: 0 52px 0 12px;
 `
 
-const StyledChatGroupBoxTextEllipse = styled.div `
+const StyledGroupBoxTextEllipse = styled.div `
     display: inline-block;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -66,11 +72,11 @@ const StyledChatGroupBoxTextEllipse = styled.div `
     max-width: 100%;
 `
 
-const StyledChatGroupBoxTextEllipseLeft = styled.em `
+const StyledGroupBoxTextEllipseLeft = styled.em `
     font-style: normal;
 `
 
-const StyledChatGroupBoxTextEllipseRight = styled.span `
+const StyledGroupBoxTextEllipseRight = styled.span `
     font-size: 11px;
 `
 
@@ -134,4 +140,4 @@ const StyledAlarmIc = styled.span `
     background-position: -324px -484px;
 `
 
-export default ChatRoomItem;
+export default DropDownItem;
