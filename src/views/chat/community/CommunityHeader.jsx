@@ -2,13 +2,13 @@ import SearchBox from '../../../components/search/SearchBox';
 
 import styled from 'styled-components';
 
-const CMSnbHeader = () => (
-    <StyledCMSnbHeader>
+const CommunityHeader = () => (
+    <StyledCommunityHeader>
         <SearchBox />
-    </StyledCMSnbHeader>
+    </StyledCommunityHeader>
 );
 
-const StyledCMSnbHeader = styled.div `
+const StyledCommunityHeader = styled.div `
     display: block;
     height: 48px;
     padding: 0 20px 0;
@@ -17,4 +17,4 @@ const StyledCMSnbHeader = styled.div `
     border-radius: 5px;
 `
 
-export default CMSnbHeader;
+export default CommunityHeader;

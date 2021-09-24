@@ -7,7 +7,7 @@ import DropDownBox from '../../../components/dropdown/DropDownBox';
 import { list } from '../../../redux/reducers/RoomReducer';
 import styled from 'styled-components';
 
-const CMSnb = ({}) => {
+const CommunitySnb = ({}) => {
 
     const dispatch = useDispatch();
     
@@ -16,17 +16,17 @@ const CMSnb = ({}) => {
     }, []);
 
     return (
-        <StyledSnb>
+        <StyledCommunitySnb>
             <CommunityHeader />
             <div className="communication_snb_group">
                 <DropDownBox />
                 <DropDownBox />
             </div>
-        </StyledSnb>
+        </StyledCommunitySnb>
     )
 };
 
-const StyledSnb = styled.div `
+const StyledCommunitySnb = styled.div `
     position: absolute;
     top: 48px;
     bottom: 0;
@@ -39,4 +39,4 @@ const StyledSnb = styled.div `
     overflow-y: auto;
 `
 
-export default CMSnb;
+export default CommunitySnb;
