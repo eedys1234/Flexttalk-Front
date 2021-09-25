@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken } from '../utils/Token.js';
+import { getToken } from '../utils/TokenUtil.js';
 import { SUCCESS } from './HttpStatus.js';
 import ApiError from './ApiError.js';
 import { _ } from '../utils/Fx.js';
@@ -27,8 +27,9 @@ const addTokenDecorator = (url, params) => {
     return { url, params };
 }
 
-const addUserIdDecorator = (url, params) => {
+const addUserIdDecorator = ({url, params = {}}) => {
     if(params.hasOwnProperty('userId')) instance.defaults.headers.common.userId = params.userId;
+
     return { url, params };
 }
 

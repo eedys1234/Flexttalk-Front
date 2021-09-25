@@ -16,6 +16,8 @@ const reduce = (f, acc, iter) => {
     };
 
 const go = (...args) => reduce((a, f) => f(a), args);
+
+const go1 = (a, f) => a instanceof Promise ? a.then(f) : f(a); 
     
 const pipe = (f, ...fs) => (...as) => go(f(...as), ...fs);
 
@@ -47,6 +49,37 @@ const take = curry((l, iter) => {
 
 const takeAll = curry(iter => take(Infinity, iter));
 
+const partitionBy = curry((f, iter) => {
+    return reduce(
+        (group, a) =>
+        go1(f(a), (k) => ((group[k] || (group[k] = [])).push(a), group))
+        , {}, iter);
+});
+
+const count = iter => iter.length; 
+
+const L_map = curry(function* mapL(f, iter) {
+    
+    for(const a of iter) {
+        yield go1(a, f);
+    }
+})
+
+const L_filter = curry(function* filterL(f, iter) {
+
+    for (const a of iter) {
+        const b = go1(a, f);
+        if(b) yield a;
+      }
+})
+
+const L_find = curry(function findL(f, iter) {
+    return {...go(
+        iter, 
+        L_filter(f),
+        take(1)
+        )};
+})
 
 export const _ = {
     reduce,
@@ -56,4 +89,12 @@ export const _ = {
     filter,
     take,
     takeAll,
-}
+    partitionBy,
+    count,
+};
+
+export const L = {
+    filter: L_filter,
+    map: L_map,
+    find: L_find,
+};

@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import App from './App';
-import RootReducer from './redux/reducers/RootReducer.js';
+import { rootReducer } from './redux/reducers/RootReducer.js';
 import logger from 'redux-logger';
 import rootSaga from './redux/sagas/RootSaga';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -17,7 +17,7 @@ const enhancer = process.env.NODE_ENV === "production"
               ? compose(applyMiddleware(sagaMiddleware))
               : composeWithDevTools(applyMiddleware(sagaMiddleware, logger));
 
-const store =  createStore(RootReducer, enhancer);
+const store =  createStore(rootReducer, enhancer);
 
 sagaMiddleware.run(rootSaga);
 

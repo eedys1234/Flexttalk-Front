@@ -1,27 +1,24 @@
 
 export default class RoomModel {
-    constructor(roomId, roomName, roomType, roomLimitCount, isAlarm = true, isBookMark = false, isOwner = true) {
+    constructor({room_id, room_name, room_type, room_limit_count, is_alarm = true, is_bookmark = false, is_owner = true}) {
 
-        this.roomId = roomId;
+        this.roomId = room_id;
         this.messages = {
             // requiredRoomName: '채팅방 이름은 필수값입니다.',
             requiredRoomType: '채팅방 Type을 필수값입니다.',
         };
 
-        // if(!roomName) {
-        //     throw new Error(this.messages.requiredRoomName);
-        // }
-        this.roomName = roomName;
+        this.roomName = room_name;
 
-        if(!roomType) {
+        if(!room_type) {
             throw new Error(this.messages.requiredRoomType);
         }
-        this.roomType = roomType;
+        this.roomType = room_type;
 
-        this.roomLimitCount = roomLimitCount;
-        this.isAlarm = isAlarm;
-        this.isBookMark = isBookMark;
-        this.isOwner = isOwner;
+        this.roomLimitCount = room_limit_count;
+        this.isAlarm = is_alarm;
+        this.isBookMark = is_bookmark;
+        this.isOwner = is_owner;
     }
 
 

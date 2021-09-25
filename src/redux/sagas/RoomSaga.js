@@ -1,6 +1,6 @@
 import { all, fork, takeLatest } from 'redux-saga/effects';
 
-import { create, remove, list } from '../reducers/RoomReducer';
+import { create, remove, list, types } from '../reducers/RoomReducer';
 import RoomApi from '../../api/RoomApi'
 import { createSaga, createActions } from '../../utils/SagaUtil';
 
@@ -9,6 +9,13 @@ const createRoomRequest = createSaga(createRoomActions, RoomApi.createRoom);
 
 function* watchCreateRoom() {
     yield takeLatest(create.type, createRoomRequest)
+}
+
+const typesActions = createActions(types.type);
+const typesRequest = createSaga(typesActions, RoomApi.types);
+
+function* watchTypes() {
+    yield takeLatest(types.type, typesRequest);
 }
 
 const removeRoomActions = createActions(remove.type);
@@ -30,5 +37,6 @@ export default function* roomSaga() {
         fork(watchCreateRoom),
         fork(watchRemoveRoom),
         fork(watchList),
+        fork(watchTypes),
     ])
 }

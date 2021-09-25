@@ -10,7 +10,7 @@ const CancelBtn = ({onClick}) => (
 );
 
 const StyledCancelBtn = styled.button `
-    display: none;
+    display: block;
     position: absolute;
     top: 0;
     right: 0;

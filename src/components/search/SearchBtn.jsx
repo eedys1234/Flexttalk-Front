@@ -15,7 +15,7 @@ const StyledSearchBtn = styled.button `
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
+    right: 27px;
     width: 27px;
     height: 27px;
     border: 0;

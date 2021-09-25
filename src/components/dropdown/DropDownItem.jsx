@@ -1,3 +1,4 @@
+import { memo }from 'react';
 import styled from "styled-components";
 
 const DropDownItem = ({item}) => {
@@ -140,4 +141,4 @@ const StyledAlarmIc = styled.span `
     background-position: -324px -484px;
 `
 
-export default DropDownItem;
+export default memo(DropDownItem);

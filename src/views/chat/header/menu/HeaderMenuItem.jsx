@@ -1,19 +1,32 @@
 
+import { useCallback } from "react"
+import { useDispatch } from "react-redux";
 import styled from "styled-components"
+import { selectedRoomType } from "../../../../redux/reducers/RoomReducer";
 
-const HeaderMenuItem = ({roomType, badgeCount = 0}) => {
+const HeaderMenuItem = ({roomType, roomTypeName, alarmCount = 0, selected}) => {
+
+    const dispatch = useDispatch();
+
+    const onClickMenu = useCallback(() => {
+        dispatch(selectedRoomType(roomType))
+    }, [roomType]);
+
     return (
-        <StyledHeaderLi>
+        <StyledHeaderLi 
+            selected={selected}
+            onClick={onClickMenu}
+        >
             <StyledHeaderChatMenu>
                 <div>
                     <span>
-                        {roomType}
+                        {roomTypeName}
                     </span>
                 </div>
                 <StyledChatBadge
-                    show={badgeCount > 0}
+                    show={alarmCount > 0}
                 >
-                    {badgeCount}
+                    {alarmCount}
                 </StyledChatBadge>
             </StyledHeaderChatMenu>
         </StyledHeaderLi>
@@ -29,7 +42,11 @@ const StyledHeaderLi = styled.li `
         width:1px;
         background: rgba(0, 0, 0, 0.2);        
     }
+    &:hover: {
+        background-color: #212529,
+    }
     cursor: pointer;
+    ${({selected}) => selected ? `background-color: #212529;` : `` }    
 `
 
 const StyledHeaderChatMenu = styled.a`

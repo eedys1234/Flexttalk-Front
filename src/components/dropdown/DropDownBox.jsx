@@ -1,45 +1,27 @@
-
+import { memo } from 'react'
 import styled from "styled-components";
 import DropDownList from "./DropDownList";
 
-const list = [
-    {
-        selected: true,
-        name : '차석기',
-        count : 1,
-    },
-    {
-        selected: false,
-        name : '이해준',
-        count : 1,
-    },
-    {
-        selected: false,
-        name : 'LEE',
-        count : 1,
-    }
-]
-
-const DropDownBox = ({title = '', count = 0, opened = true}) => {
+const DropDownBox = ({title = '', count = 0, opened = true, list = [], convertProps}) => {
 
     return(
-    <StyledDropDownBox
-        opened={opened}
-    > 
-        <StyledDropDownTitleBox>
-            <StyledDropDownTitle>
-                <span>
-                    {/* 즐겨찾는 목록 */}
-                    {title}(<span className="number">{count}</span>)
-                </span>
-                <StyledDropDownCollapse/>
-            </StyledDropDownTitle>
-        </StyledDropDownTitleBox>
-        <DropDownList
-            list={list}
-        >
-        </DropDownList>
-    </StyledDropDownBox>
+            <StyledDropDownBox
+                opened={opened}
+            > 
+                <StyledDropDownTitleBox>
+                    <StyledDropDownTitle>
+                        <span>
+                            {title} (<span className="number">{count}</span>)
+                        </span>
+                        <StyledDropDownCollapse/>
+                    </StyledDropDownTitle>
+                </StyledDropDownTitleBox>
+                <DropDownList
+                    list={list}
+                    convertProps={convertProps}
+                >
+                </DropDownList>
+            </StyledDropDownBox>
     )
 }
 
@@ -74,4 +56,4 @@ const StyledDropDownCollapse = styled.i `
     margin-top: ${(props) => props.opened ? '-2px' : '0'};
 `
 
-export default DropDownBox;
+export default memo(DropDownBox);

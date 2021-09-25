@@ -2,26 +2,33 @@ import SearchBtn from './SearchBtn';
 import CacnelBtn from './CancelBtn';
 import styled from 'styled-components';
 
-const SearchBox = ({onClickCancel, onClickSearch, onKeyUpSearch, onChangeInput}) => (
-    <StyledSearchBox>
-        <StyledSearchField> 
-            <div className="basic_text">
-                <StyledInpbx>
-                    <StyledInput
-                        onChange={onChangeInput}
-                    /> 
-                    <SearchBtn 
-                        onClick={onClickSearch}
-                        onKeyUp={onKeyUpSearch}
-                    />
-                    <CacnelBtn 
-                        onClick={onClickCancel}
-                    />                    
-                </StyledInpbx>
-            </div>
-        </StyledSearchField>
-    </StyledSearchBox>
-);
+const SearchBox = ({keyword, onClickCancel, onClickSearch, onKeyUpSearch, onChangeInput}) => {
+
+
+    return (
+            <StyledSearchBox>
+                <StyledSearchField> 
+                    <div className="basic_text">
+                        <StyledInpbx>
+                            <StyledInput
+                                name="keyword"
+                                value={keyword}
+                                onChange={onChangeInput}
+                            /> 
+                            <SearchBtn 
+                                onClick={onClickSearch}
+                                onKeyUp={onKeyUpSearch}
+                            />
+                            <CacnelBtn 
+                                onClick={onClickCancel}
+                            />                    
+                        </StyledInpbx>
+                    </div>
+                </StyledSearchField>
+            </StyledSearchBox>
+
+    )
+};
 
 const StyledSearchBox = styled.div `
     width: 240px;
@@ -38,7 +45,7 @@ const StyledInpbx = styled.div `
     position: relative;
     height: 19px;
     padding: 6px 6px 0;
-    padding-right: 25px;
+    padding-right: 52px;
     border: 1px solid #dbdbdb;
     background: #fff;
     line-height: 19px;

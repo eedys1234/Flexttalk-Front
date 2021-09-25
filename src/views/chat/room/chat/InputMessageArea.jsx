@@ -61,22 +61,6 @@ const StyledMentionContent = styled.div `
     overflow-y: auto;
 `
 
-const StyledMention = styled.div `
-    position: absolute;
-    top: auto;
-    bottom: 18px;
-    right: 121px;
-    z-index: 10;
-`
-
-const StyledEmotion = styled.div `
-    position: absolute;
-    top: auto;
-    bottom: 18px;
-    right: 87px;
-    z-index: 10;
-`
-
 const StyledSubmitBtn = styled.button `
     position: absolute;
     top: 0;

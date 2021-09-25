@@ -1,25 +1,28 @@
+import { memo } from 'react';
 import DropDownItem from './DropDownItem';
 import styled from 'styled-components';
 
-const DropDownList = ({list}) => {
+const DropDownList = ({list, convertProps}) => {
+    
+    list = convertProps && list.map(convertProps);
 
     return(
         <StyledDropDownList>
         {
-            list.map((item)=> createItem(item))
+            list.map(item => 
+                <DropDownItem 
+                    key={item.id}
+                    item={item}
+                    convertProps={convertProps}
+                />
+            )
         }
         </StyledDropDownList>
     )
 };
 
-const createItem = (item) => {
-    return <DropDownItem 
-                item={item}
-            />
-}
-
 const StyledDropDownList = styled.ul `
     border-bottom: 1px solid #e5e5e5;
 `
 
-export default DropDownList;
+export default memo(DropDownList);

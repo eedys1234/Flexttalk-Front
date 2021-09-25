@@ -48,7 +48,7 @@
                 "room_type": "NORMAL",
                 "room_limit_count": 2,
                 "is_alarm": true,
-                "is_bookmark": false,
+                "is_bookmark": true,
                 "is_owner": false
             }
         ]

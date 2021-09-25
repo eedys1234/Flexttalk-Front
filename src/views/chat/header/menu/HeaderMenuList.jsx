@@ -4,13 +4,17 @@ import HeaderMenuItem from './HeaderMenuItem'
 import styled from "styled-components";
 
 const HeaderMenuList = ({menuList}) => {
+    
     return (
         <StyledHeaderUl>
             {
                 menuList.map((menuItem)=> {
                     return <HeaderMenuItem
+                        key={menuItem.roomType}
                         roomType={menuItem.roomType}
-                        badgeCount={menuItem.badgeCount}
+                        roomTypeName={menuItem.roomTypeName}
+                        alarmCount={menuItem.alarmCount}
+                        selected={menuItem.selected}
                     >                        
                     </HeaderMenuItem>
                 })

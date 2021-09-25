@@ -2,11 +2,11 @@ import HeaderContenEtcList from "./HeaderContentEtcList";
 
 import styled from "styled-components";
 
-const HeaderContent = ({roomName, roomEtcFeatureList}) => {
+const HeaderContent = ({selectedRoomName, roomEtcFeatureList}) => {
     return (
         <StyledHeaderWrapper>
             <StyledChatTitle>
-                <StyledChatTitleText>{roomName}</StyledChatTitleText>
+                <StyledChatTitleText>{selectedRoomName}</StyledChatTitleText>
             </StyledChatTitle>
             <StyledChatETC>
                 <HeaderContenEtcList 

@@ -1,25 +1,16 @@
 
-import styled from "styled-components";
 import HeaderMenuList from "./HeaderMenuList";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
 
 const HeaderMenu = () => {
+
+    const { types } = useSelector(state => state.rooms);
+
     return (
         <StyledHeaderMenu>
             <HeaderMenuList
-                menuList={[
-                    {
-                        roomType: `1:1`,
-                        badgeCount: 10,
-                    },
-                    {
-                        roomType: `그룹`,
-                        badgeCount: 0,
-                    },
-                    {
-                        roomType: `오픈`,
-                        badgeCount: 0,
-                    }
-                ]}
+                menuList={types}
             >
 
             </HeaderMenuList>
@@ -37,7 +28,5 @@ const StyledHeaderMenu = styled.div `
     text-align: center;
     padding-right: 20px;
 `
-
-
 
 export default HeaderMenu; 

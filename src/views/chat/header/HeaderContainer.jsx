@@ -2,12 +2,23 @@ import HeaderMenu from "./menu/HeaderMenu";
 import HeaderContent from './feature/HeaderContent';
 import styled from "styled-components";
 
+import { types } from '../../../redux/reducers/RoomReducer' 
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
 const HeaderContainer = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(types())
+    }, []);
+
     return (
         <StyledHeader>
             <HeaderMenu />
             <HeaderContent 
-                roomName={`문자 서비스`}
+                selectedRoomName={`문자 서비스`}
                 roomEtcFeatureList={[
                     {
                         name: '참여자'

@@ -1,27 +1,22 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 import CommunityHeader from './CommunityHeader';
-import DropDownBox from '../../../components/dropdown/DropDownBox';
+import CommunityGroup from './CommunityGroup';
 
-import { list } from '../../../redux/reducers/RoomReducer';
+import useRoom from '../../../hooks/useRoom';
+
 import styled from 'styled-components';
 
-const CommunitySnb = ({}) => {
+const CommunitySnb = ({userId = 0}) => {
+    const roomType = 'NORMAR';
 
-    const dispatch = useDispatch();
+    useRoom(userId, roomType)
     
-    useEffect(() => {
-        dispatch(list())
-    }, []);
 
     return (
         <StyledCommunitySnb>
             <CommunityHeader />
-            <div className="communication_snb_group">
-                <DropDownBox />
-                <DropDownBox />
-            </div>
+            <CommunityGroup>
+            </CommunityGroup>
         </StyledCommunitySnb>
     )
 };

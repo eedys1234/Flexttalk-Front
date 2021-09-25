@@ -7,9 +7,10 @@ const HeaderContenEtcList = ({roomEtcFeatureList}) => {
     return (
         <StyledChatEtcUl>
         {
-            roomEtcFeatureList.map((feature) => {
+            roomEtcFeatureList.map((feature, index) => {
                 return (
                     <HeaderContentEtcItem
+                        key={index}
                         feature={feature}
                     >
                     </HeaderContentEtcItem>

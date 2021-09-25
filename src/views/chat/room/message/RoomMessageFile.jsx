@@ -12,7 +12,7 @@ const RoomMessageFile = () => {
                     <img src="https://api0.wehago.com/DCloudStorageServer/WehagoIMG//company_25/2019/03/19/5c07d270-4a01-11e9-9157-0b50511f2a6d_sl.jpg" />
                 </div>
                 <StyledMessageFileIn>
-                    <img src className="img_file" />
+                    <img src="" className="img_file" />
                         <StyledFileNameEllipsis>표준임대차계약서.doc</StyledFileNameEllipsis>
                         <StyledFileSize>69.00KB</StyledFileSize>
                         <StyledFileDownloadBtn>

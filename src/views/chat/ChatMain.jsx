@@ -5,6 +5,7 @@ import HeaderContainer from "./header/HeaderContainer";
 import styled from "styled-components";
 
 const ChatMain = () => {
+
     return (
         <div className="flextalk snbnext">
             <StyledContainer>

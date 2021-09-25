@@ -20,4 +20,10 @@ export default class RoomApi {
         return get(`${url}`, { user_id: 1});
     }
 
+    //채팅방 Type 정보 가져오기
+    static types = () => {
+        const url = `/api/v1/rooms/types`;
+        return get(`${url}`)
+    }
+
 };
