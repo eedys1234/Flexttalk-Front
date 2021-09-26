@@ -56,7 +56,24 @@ const partitionBy = curry((f, iter) => {
         , {}, iter);
 });
 
+const flatten = (iter) => go(iter,L_filter, takeAll)
+
 const count = iter => iter.length; 
+
+const isIter = a => a && a[Symbol.iterator];
+
+const L_flatten = curry(function *(iter) {
+    for(const a of iter) {
+        if(isIter(a)) for(const b of a) yield b;
+        else yield a;
+    }
+});
+
+const L_flatMap = curry(function* (f, iter) {
+    return go(iter, 
+        L_map(f),
+        L_flatten)
+});
 
 const L_map = curry(function* mapL(f, iter) {
     
@@ -91,10 +108,13 @@ export const _ = {
     takeAll,
     partitionBy,
     count,
+    flatten,
 };
 
 export const L = {
     filter: L_filter,
     map: L_map,
     find: L_find,
+    flatten: L_flatten,
+    flatMap: L_flatMap,
 };

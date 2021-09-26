@@ -2,8 +2,7 @@ import SearchBtn from './SearchBtn';
 import CacnelBtn from './CancelBtn';
 import styled from 'styled-components';
 
-const SearchBox = ({keyword, onClickCancel, onClickSearch, onKeyUpSearch, onChangeInput}) => {
-
+const SearchBox = ({keyword, onClickCancel, onClickSearch, onKeyUpSearch, onChangeKeyword}) => {
 
     return (
             <StyledSearchBox>
@@ -13,7 +12,7 @@ const SearchBox = ({keyword, onClickCancel, onClickSearch, onKeyUpSearch, onChan
                             <StyledInput
                                 name="keyword"
                                 value={keyword}
-                                onChange={onChangeInput}
+                                onChange={onChangeKeyword}
                             /> 
                             <SearchBtn 
                                 onClick={onClickSearch}

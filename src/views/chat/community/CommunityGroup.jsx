@@ -2,35 +2,45 @@
 import DropDownBox from "../../../components/dropdown/DropDownBox";
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectedRoom } from "../../../redux/reducers/RoomReducer";
+import { useCallback } from "react";
+import { selectRoom } from "../../../redux/reducers/RoomReducer";
 
-const convertProps = (item) => {           
-    console.log('[tag]', 'convertProps()')         
-    return {
-        ...item,
-        id: item.roomId,
-        name: item.roomName,
-        count: 0,           
-    };
+const getName = item => {
+    return item.roomName;
+}
+
+const getId = item => {
+    return item.roomId;
 }
 
 const CommunityGroup = () => {
 
-    const { selectedRoomTypeName, bookmarks, primary } = useSelector(state => state.rooms);
+    const { selectedRoomTypeName, searchBookmarks, searchPrimary } = useSelector(state => state.rooms);
 
+    const dispath = useDispatch();
+
+    const onClickRoom = useCallback((e, selectedRoom)=> {
+        e.stopPropagation();
+        dispath(selectRoom(selectedRoom))
+    }, []);
+    
     return (
         <div className="communication_snb_group">
             <DropDownBox
                 title={'즐겨찾는 목록'}
-                list={bookmarks}
+                list={searchBookmarks}
                 opened={true}
-                convertProps={convertProps}
+                getName={getName}
+                getId={getId}
+                onClickRoom={onClickRoom}
             />
             <DropDownBox 
                 title={selectedRoomTypeName}
-                list={primary}
+                list={searchPrimary}
                 opened={true}
-                convertProps={convertProps}
+                getName={getName}
+                getId={getId}
+                onClickRoom={onClickRoom}
             />
         </div>
     )

@@ -1,12 +1,16 @@
 import HeaderContenEtcList from "./HeaderContentEtcList";
-
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-const HeaderContent = ({selectedRoomName, roomEtcFeatureList}) => {
+const HeaderContent = ({roomEtcFeatureList}) => {
+
+    const { selectedRoom } = useSelector(state => state.rooms);
+    const { roomName } = selectedRoom;
+
     return (
         <StyledHeaderWrapper>
             <StyledChatTitle>
-                <StyledChatTitleText>{selectedRoomName}</StyledChatTitleText>
+                <StyledChatTitleText>{roomName}</StyledChatTitleText>
             </StyledChatTitle>
             <StyledChatETC>
                 <HeaderContenEtcList 

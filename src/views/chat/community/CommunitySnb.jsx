@@ -10,13 +10,11 @@ const CommunitySnb = ({userId = 0}) => {
     const roomType = 'NORMAR';
 
     useRoom(userId, roomType)
-    
 
     return (
         <StyledCommunitySnb>
             <CommunityHeader />
-            <CommunityGroup>
-            </CommunityGroup>
+            <CommunityGroup />
         </StyledCommunitySnb>
     )
 };

@@ -1,6 +1,6 @@
 import { all, fork, takeLatest } from 'redux-saga/effects';
 
-import { create, remove, list, types } from '../reducers/RoomReducer';
+import { create, remove, list, types, selectRoomType } from '../reducers/RoomReducer';
 import RoomApi from '../../api/RoomApi'
 import { createSaga, createActions } from '../../utils/SagaUtil';
 
@@ -32,11 +32,19 @@ function* watchList() {
     yield takeLatest(list.type, listRequest);
 }
 
+const selectRoomTypeActions = createActions(list.type);
+const selectRoomTypeRequest = createSaga(selectRoomTypeActions, RoomApi.list);
+
+function* watchSelectRoomType() {
+    yield takeLatest(selectRoomType.type, selectRoomTypeRequest);
+}
+
 export default function* roomSaga() {
     yield all([
         fork(watchCreateRoom),
         fork(watchRemoveRoom),
         fork(watchList),
         fork(watchTypes),
+        fork(watchSelectRoomType),
     ])
 }

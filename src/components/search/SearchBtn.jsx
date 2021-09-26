@@ -25,6 +25,11 @@ const StyledSearchBtn = styled.button `
 `
 
 const StyledICSearch = styled.span `
+    display: inline-block;
+    background: url(../../static/sp_ic.png) 0 0 no-repeat;
+    overflow: hidden;
+    line-height: 100em;
+    vertical-align: top;
     width: 16px;
     height: 14px;
     background-position: -100px 0;

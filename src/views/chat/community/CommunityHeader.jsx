@@ -1,12 +1,29 @@
 import SearchBox from '../../../components/search/SearchBox';
 
 import styled from 'styled-components';
+import { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchRoom } from '../../../redux/reducers/RoomReducer';
 
-const CommunityHeader = () => (
-    <StyledCommunityHeader>
-        <SearchBox />
-    </StyledCommunityHeader>
-);
+const CommunityHeader = () => {
+
+    const { keyword } = useSelector(state => state.rooms);
+    const dispatch = useDispatch();
+
+    const onChangeKeyword = useCallback((e) => {
+        const { value } = e.target;        
+        dispatch(searchRoom(value));
+    }, []);
+
+    return(
+            <StyledCommunityHeader>
+                <SearchBox 
+                    keyword={keyword}
+                    onChangeKeyword={onChangeKeyword}
+                />
+            </StyledCommunityHeader>
+    )
+};
 
 const StyledCommunityHeader = styled.div `
     display: block;

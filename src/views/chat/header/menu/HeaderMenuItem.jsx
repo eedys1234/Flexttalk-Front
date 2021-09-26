@@ -2,14 +2,14 @@
 import { useCallback } from "react"
 import { useDispatch } from "react-redux";
 import styled from "styled-components"
-import { selectedRoomType } from "../../../../redux/reducers/RoomReducer";
+import { selectRoomType } from "../../../../redux/reducers/RoomReducer";
 
 const HeaderMenuItem = ({roomType, roomTypeName, alarmCount = 0, selected}) => {
 
     const dispatch = useDispatch();
 
     const onClickMenu = useCallback(() => {
-        dispatch(selectedRoomType(roomType))
+        dispatch(selectRoomType(roomType))
     }, [roomType]);
 
     return (

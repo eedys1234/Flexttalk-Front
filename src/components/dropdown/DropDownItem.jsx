@@ -1,15 +1,17 @@
 import { memo }from 'react';
 import styled from "styled-components";
 
-const DropDownItem = ({item}) => {
+const DropDownItem = ({item, name, onClickRoom}) => {
 
-    const { selected, name, count } = item;
-
+    const { selected, count } = item;
+    
     return(
         <StyledGroupBox
             selected={selected}
+            onClick={(e) => onClickRoom(e, item)}
         >
-        <StyledGroupBoxText>
+        <StyledGroupBoxText 
+        >
             <div className="img_thum">
                 <div className="pic_wrap">
                     <span className="use_member"></span>

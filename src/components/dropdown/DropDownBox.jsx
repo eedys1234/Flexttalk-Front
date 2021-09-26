@@ -1,24 +1,33 @@
-import { memo } from 'react'
+import { memo, useCallback, useState } from 'react'
 import styled from "styled-components";
 import DropDownList from "./DropDownList";
 
-const DropDownBox = ({title = '', count = 0, opened = true, list = [], convertProps}) => {
+const DropDownBox = ({title = '', list = [], getName, getId, onClickRoom}) => {
+
+    const [opened, setOpen] = useState(true);
+    
+    const onClickBox = useCallback(() => {
+        setOpen(!opened)
+    }, [opened]);
 
     return(
             <StyledDropDownBox
-                opened={opened}
+                onClick={onClickBox}
             > 
                 <StyledDropDownTitleBox>
                     <StyledDropDownTitle>
                         <span>
-                            {title} (<span className="number">{count}</span>)
+                            {title} (<span className="number">{list.length || 0}</span>)
                         </span>
                         <StyledDropDownCollapse/>
                     </StyledDropDownTitle>
                 </StyledDropDownTitleBox>
                 <DropDownList
+                    opened={opened}
                     list={list}
-                    convertProps={convertProps}
+                    getName={getName}
+                    getId={getId}
+                    onClickRoom={onClickRoom}
                 >
                 </DropDownList>
             </StyledDropDownBox>
@@ -29,7 +38,6 @@ const StyledDropDownBox = styled.div `
     background: #fff;
     border-radius: 5px;
     margin-top: 9px;
-    display: ${(props) => props.opened ? 'block' : 'none'}
 `
 
 const StyledDropDownTitleBox = styled.div `

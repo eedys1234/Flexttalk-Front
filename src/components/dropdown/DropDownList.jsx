@@ -2,19 +2,20 @@ import { memo } from 'react';
 import DropDownItem from './DropDownItem';
 import styled from 'styled-components';
 
-const DropDownList = ({list, convertProps}) => {
+const DropDownList = ({opened, list, getName, getId, onClickRoom}) => {
     
-    list = convertProps && list.map(convertProps);
-
     return(
-        <StyledDropDownList>
+        <StyledDropDownList
+            opened={opened}
+        >
         {
             list.map(item => 
-                <DropDownItem 
-                    key={item.id}
-                    item={item}
-                    convertProps={convertProps}
-                />
+                    <DropDownItem 
+                        key={getId ? getId(item) : item.id}
+                        name={getName ? getName(item) : item.name}
+                        item={item}
+                        onClickRoom={onClickRoom}
+                    />
             )
         }
         </StyledDropDownList>
@@ -23,6 +24,8 @@ const DropDownList = ({list, convertProps}) => {
 
 const StyledDropDownList = styled.ul `
     border-bottom: 1px solid #e5e5e5;
+    display: ${({opened}) => opened ? 'block' : 'none'}
+
 `
 
 export default memo(DropDownList);

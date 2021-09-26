@@ -2,15 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import RoomModel from '../../models/RoomModel';
 import RoomTypeModel from '../../models/RoomTypeModel';
 import { _, L } from '../../utils/Fx';
+import { kmp } from '../../utils/SearchUtil';
 
 const name = 'room';
 
 const initialState = {
+    keyword: '',
     selectedRoomType: 'NORMAL', 
     selectedRoomTypeName: '1:1',
-    selectedRoomName: '',
-    bookmarks: [],
-    primary: [],
+    selectedRoom: {},
+    searchBookmarks: [],
+    searchPrimary: [],
+    orgBookmarks: [],
+    orgPrimary: [],
     types: [],
 };
 
@@ -50,12 +54,20 @@ const roomSlice = createSlice({
             const partitionRooms = _.go(
                 action.data,
                 _.map(room => new RoomModel(room)),
-                _.partitionBy(room => (room.isBookMark ? "bookmarks" : "primary"))
+                _.partitionBy(room => (room.isBookMark ? "orgBookmarks" : "orgPrimary"))
             )
+            
+            const selectedRoom = [...partitionRooms.orgBookmarks, ...partitionRooms.orgPrimary][0];
+            
+            selectedRoom.select();
 
             return {
                 ...state,
                 ...partitionRooms,
+                searchBookmarks: partitionRooms.orgBookmarks,
+                searchPrimary: partitionRooms.orgPrimary,
+                selectedRoom,
+                keyword: '',
             }
 
         },
@@ -82,15 +94,15 @@ const roomSlice = createSlice({
 
         },
 
-        selectedRoomType(state, action) {
+        selectRoomType(state, action) {
 
-            const selectedRoomType = action.payload;            
+            const selectedRoomType = action.payload;    
             const matchRoomType = type => selectedRoomType === type.roomType;            
             
             let types = state.types.map(type => new RoomTypeModel({...type, selected: false}));
             const selectedRoomTypeObj = types.find(matchRoomType);
             selectedRoomTypeObj.select();
-            
+
             return {
                 ...state, 
                 selectedRoomType: selectedRoomType,
@@ -99,13 +111,48 @@ const roomSlice = createSlice({
             }
         },
 
-        selectedRoom(state, action) {
+        selectRoom(state, action) {
+
+            const selectedRoom = action.payload;
+                    
+            const roomCondition = room => selectedRoom.roomId === room.roomId;
+            const select = room => roomCondition(room) ? new RoomModel({...room, selected: true}) 
+            : room.selected ? { ...room, selected: false} : room;
+            
+            const orgBookmarks = state.orgBookmarks.map(select);
+            const orgPrimary = state.orgPrimary.map(select);
+            const searchBookmarks = state.searchBookmarks.map(select);
+            const searchPrimary = state.searchPrimary.map(select);
+
+            const nextRoom = selectedRoom.isBookMark ? orgBookmarks.find(roomCondition) : orgPrimary.find(roomCondition);
 
             return {
                 ...state,
-                selectedRoomName: action.payload,
+                orgBookmarks,
+                orgPrimary,
+                searchBookmarks,
+                searchPrimary,
+                selectedRoom: nextRoom,
+            };
+        },
+
+        searchRoom(state, action) {
+
+            const keyword = action.payload;
+            let filterOrgRooms = [...state.orgBookmarks, ...state.orgPrimary]
+            .filter((room) => kmp(room.roomName, keyword));
+
+            filterOrgRooms = _.go(filterOrgRooms,
+                _.partitionBy(room => (room.isBookMark ? "orgBookmarks" : "orgPrimary"))
+            );
+
+            return {
+                ...state,
+                keyword,
+                searchBookmarks: filterOrgRooms.orgBookmarks || [],
+                searchPrimary: filterOrgRooms.orgPrimary || [],
             }
-        }
+        },
 
     }
 })
@@ -115,7 +162,8 @@ export const {
     remove, removeSuccess, removeFailure, 
     list, listSuccess, listFailure,
     types, typesSuccess, typesFailure, 
-
-    selectedRoom, selectedRoomType
+    
+    selectRoom, selectRoomType, searchRoom
 } = roomSlice.actions;
+
 export default roomSlice;

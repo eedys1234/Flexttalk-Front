@@ -14,7 +14,7 @@ export default class RoomTypeModel {
         this.alarmCount = alarmCount;
     }
 
-    select() {
+    select = () => {
         this.selected = true;
     }
 
