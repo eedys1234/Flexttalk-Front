@@ -2,8 +2,11 @@
 import HeaderContentEtcItem from "./HeaderContentEtcItem";
 
 import styled from "styled-components";
+import { useCallback } from "react";
 
 const HeaderContenEtcList = ({roomEtcFeatureList}) => {
+
+
     return (
         <StyledChatEtcUl>
         {

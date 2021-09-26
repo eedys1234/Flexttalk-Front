@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { types } from '../../../redux/reducers/RoomReducer' 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { roomEtcFeatureList } from '../../../utils/RoomUtil';
 
 const HeaderContainer = () => {
 
@@ -19,9 +18,7 @@ const HeaderContainer = () => {
     return (
         <StyledHeader>
             <HeaderMenu />
-            <HeaderContent 
-                roomEtcFeatureList={roomEtcFeatureList}
-            />
+            <HeaderContent />
         </StyledHeader>
     )
 }

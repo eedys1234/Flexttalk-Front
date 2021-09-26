@@ -1,4 +1,4 @@
-import { post, put } from './RestApi';
+import { get, post, put } from './RestApi';
 
 export default class UserApi {
 
@@ -25,5 +25,10 @@ export default class UserApi {
     static login = (params) => {
         const url = `/api/v1/user/login`;
         return post(`${url}`, params);
+    }
+
+    static users = () => {
+        const url = `/api/v1/users`
+        return get(`${url}`);
     }
 }

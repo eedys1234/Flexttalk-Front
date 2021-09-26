@@ -1,6 +1,6 @@
 export const roomEtcFeatureList = [
     {
-        name: '참여자'
+        name: '참여자',
     },
     {
         name: '초대'

@@ -1,12 +1,18 @@
 
+import { memo } from "react";
 
 import styled from "styled-components";
 
 const HeaderContentEtcItem = ({feature}) => {
+
+    const { name, onClickItem } = feature;
+
     return (
-        <StyledChatEtcLi>
+        <StyledChatEtcLi
+            onClick={onClickItem}
+        >
             <StyledChatEtcBtn>
-                 <span className="ic_member_info">{feature.name}</span>
+                 <span className="ic">{name}</span>
              </StyledChatEtcBtn>
          </StyledChatEtcLi>
     );
@@ -32,4 +38,4 @@ const StyledChatEtcBtn = styled.button `
     cursor: pointer;
 `
 
-export default HeaderContentEtcItem;
+export default memo(HeaderContentEtcItem);

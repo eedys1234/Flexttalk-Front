@@ -1,11 +1,39 @@
+import { useCallback } from "react";
 import HeaderContenEtcList from "./HeaderContentEtcList";
 import { useSelector } from "react-redux";
+import { roomEtcFeatureList } from '../../../../utils/RoomUtil';
 import styled from "styled-components";
 
-const HeaderContent = ({roomEtcFeatureList}) => {
+const HeaderContent = () => {
 
     const { selectedRoom } = useSelector(state => state.rooms);
-    const { roomName } = selectedRoom;
+    const { roomName } = selectedRoom || { roomName: ''};
+
+    const onClickParticipants = useCallback((e) => {
+        console.log('tag', 'onClickParticipants()');
+    }, [selectedRoom]);
+
+    const onClickInvite = useCallback((e) => {
+        console.log('tag', 'onClickInvite()');
+    }, [selectedRoom]);
+
+    const onClickDeport = useCallback((e) => {
+        console.log('tag', 'onClickDeport()');
+    }, [selectedRoom]);
+
+    const onClickDisplayFiles = useCallback((e) => {
+        console.log('tag', 'onClickDisplayFiles()');
+    }, [selectedRoom]);
+
+    const onClickSearchMessage = useCallback((e) => {
+        console.log('tag', 'onClickSearchMessage()');
+    }, [selectedRoom]);
+
+    roomEtcFeatureList[0].onClickItem = roomEtcFeatureList[0].onClickItem || onClickParticipants;
+    roomEtcFeatureList[1].onClickItem = roomEtcFeatureList[1].onClickItem || onClickInvite;
+    roomEtcFeatureList[2].onClickItem = roomEtcFeatureList[2].onClickItem || onClickDeport;
+    roomEtcFeatureList[3].onClickItem = roomEtcFeatureList[3].onClickItem || onClickDisplayFiles;
+    roomEtcFeatureList[4].onClickItem = roomEtcFeatureList[4].onClickItem || onClickSearchMessage;
 
     return (
         <StyledHeaderWrapper>

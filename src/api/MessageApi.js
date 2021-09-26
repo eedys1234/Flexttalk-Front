@@ -26,4 +26,14 @@ export default class MessageApi {
         const url = `/api/v1/rooms/messages/read`;
         return put(`${url}`, params);
     }
+
+    static files = ({roomId}) => {
+        const url = `/api/v1/rooms/${roomId}/files`
+        return get(`${url}`);
+    }
+
+    static search = ({roomId}) => {
+        const url = `/api/v1/rooms/${roomId}/message/search`
+        return get(`${url}`);
+    }
 }
