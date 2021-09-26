@@ -33,19 +33,19 @@ export default class ParticipantApi {
     }
     
     //채팅방 즐겨찾기 등록
-    static addBookMarkToRoom = ({roomId, participantId}) => {
+    static addBookMarkToRoom = ({ selectedRoom : { roomId } , participantId}) => {
         const url = `/api/v1/rooms/${roomId}/participants/${participantId}/bookmark`;
         return post(`${url}`, {});
     }
     
     //채팅방 즐겨찾기 삭제
-    static deleteBookMarkToRoom = ({roomId, participantId}) => {
+    static deleteBookMarkToRoom = ({ selectedRoom : { roomId } , participantId }) => {
         const url = `/api/v1/rooms/${roomId}/participants/${participantId}/bookmark`;
         return remove(`${url}`, {});
     }
     
     //채팅방 알람 등록
-    static addAlarmToRoom = ({roomId, participantId}) => {
+    static addAlarmToRoom = ({ selectedRoom : { roomId } , participantId }) => {
         const url = `/api/v1/rooms/${roomId}/participants/${participantId}/alarm`;
         return post(`${url}`, {});
     }

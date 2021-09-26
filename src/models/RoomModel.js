@@ -1,16 +1,13 @@
 
 export default class RoomModel {
+
     constructor(room) {
 
         this.roomId = room.room_id || room.roomId;
-        RoomModel.prototype.messages = {
-            // requiredRoomName: '채팅방 이름은 필수값입니다.',
-            requiredRoomType: '채팅방 Type을 필수값입니다.',
-        };
-
         this.roomName = room.room_name || room.roomName;
 
         this.roomType = room.room_type || room.roomType;
+        
         if(!this.roomType) {
             throw new Error(this.messages.requiredRoomType);
         }
@@ -33,5 +30,9 @@ export default class RoomModel {
     toJSON() {
         
     }
-
 }
+
+RoomModel.prototype.messages = {
+    // requiredRoomName: '채팅방 이름은 필수값입니다.',
+    requiredRoomType: '채팅방 Type을 필수값입니다.',
+};

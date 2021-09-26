@@ -6,6 +6,9 @@ export const roomEtcFeatureList = [
         name: '초대'
     },
     {
+        name: '강퇴'
+    },
+    {
         name: '파일 모아보기'
     },
     {

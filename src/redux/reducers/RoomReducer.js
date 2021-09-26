@@ -18,6 +18,29 @@ const initialState = {
     types: [],
 };
 
+const templateSetRoomSuccess = (state, action, callback) => {
+
+    const { selectedRoom } = action.payload;
+    const { roomId, isAlarm } = selectedRoom;
+
+    const roomCondition = room => roomId === room.roomId;
+    const select = room => roomCondition(room) ? callback(room, isAlarm) 
+    : room.selected ? { ...room, selected: false} : room;
+
+    const orgBookmarks = state.orgBookmarks.map(select);
+    const orgPrimary = state.orgPrimary.map(select);
+    const searchBookmarks = state.searchBookmarks.map(select);
+    const searchPrimary = state.searchPrimary.map(select);
+
+    return {
+        ...state,
+        orgBookmarks,
+        orgPrimary,
+        searchBookmarks,
+        searchPrimary,
+    }
+}
+
 const roomSlice = createSlice({
     name, 
     initialState,
@@ -155,49 +178,11 @@ const roomSlice = createSlice({
         },
 
         setAlarmToRoomSuccess(state, action) {
-
-            const { selectedRoom } = action.payload;
-            const { roomId, isAlarm } = selectedRoom;
-
-            const roomCondition = room => roomId === room.roomId;
-            const select = room => roomCondition(room) ? new RoomModel({...room, isAlarm: !isAlarm}) 
-            : room.selected ? { ...room, selected: false} : room;
-
-            const orgBookmarks = state.orgBookmarks.map(select);
-            const orgPrimary = state.orgPrimary.map(select);
-            const searchBookmarks = state.searchBookmarks.map(select);
-            const searchPrimary = state.searchPrimary.map(select);
-
-            return {
-                ...state,
-                orgBookmarks,
-                orgPrimary,
-                searchBookmarks,
-                searchPrimary,
-            }
+            return templateSetRoomSuccess(state, action, (room, isAlarm) => new RoomModel({...room, isAlarm: !isAlarm}));
         },
 
         setBookMarkToRoomSuccess(state, action) {
-
-            const { selectedRoom } = action.payload;
-            const { roomId, isBookMark } = selectedRoom;
-
-            const roomCondition = room => roomId === room.roomId;
-            const select = room => roomCondition(room) ? new RoomModel({...room, isBookMark: !isBookMark}) 
-            : room.selected ? { ...room, selected: false} : room;
-
-            const orgBookmarks = state.orgBookmarks.map(select);
-            const orgPrimary = state.orgPrimary.map(select);
-            const searchBookmarks = state.searchBookmarks.map(select);
-            const searchPrimary = state.searchPrimary.map(select);
-
-            return {
-                ...state,
-                orgBookmarks,
-                orgPrimary,
-                searchBookmarks,
-                searchPrimary,
-            }
+            return templateSetRoomSuccess(state, action, (room, isBookMark) => new RoomModel({...room, isBookMark: !isBookMark}));
         },
 
     }

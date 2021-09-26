@@ -11,6 +11,7 @@ const DropDownItem = ({item, name, onClickItem, onClickFrontIC, onClickBackIC}) 
             onClick={(e) => onClickItem(e, item)}
         >
         <StyledGroupBoxText 
+            onClick={(e) => e.preventDefault()}
         >
             <div className="img_thum">
                 <div className="pic_wrap">

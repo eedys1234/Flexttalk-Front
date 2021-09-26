@@ -7,60 +7,44 @@ const initialState = {
     participantId: 0,
 }
 
+const participantSetting = (state, action) => {
+
+    const selectedRoom = action.payload;
+           
+    return {
+        selectedRoom,
+        participantId: state.participantId,
+    }
+}
+
 const participantSlice = createSlice({
     name,
     initialState,
     reducers: {
 
         addBookMarkToRoom(state, action) {
-
-            const selectedRoom = action.payload;
-            
-            action.payload = {
-                selectedRoom,
-                participantId: state.participantId,
-            }
+            action.payload = participantSetting(state, action);
         },
 
         deleteBookMarkToRoom(state, action) {
-
-            const selectedRoom = action.payload;
-            
-            action.payload = {
-                selectedRoom,
-                participantId: state.participantId,
-            }
+            action.payload = participantSetting(state, action);
         },
 
         addAlarmToRoom(state, action) {
-
-            const selectedRoom = action.payload;
-            
-            action.payload = {
-                selectedRoom,
-                participantId: state.participantId,
-            }
-
+            action.payload = participantSetting(state, action);
         },
 
         deleteAlarmToRoom(state, action) {
-            
-            const selectedRoom = action.payload;
-            
-            action.payload = {
-                selectedRoom,
-                participantId: state.participantId,
-            }
-
+            action.payload = participantSetting(state, action);
         },
         
     },
 })
 
 export const {
-    addBookMarkToRoom, addBookMarkToRoomSuccess, addBookMarkToRoomFailure,
-    deleteBookMarkToRoom, deleteBookMarkToRoomSuccess, deleteBookMarkToRoomFailure,
-    addAlarmToRoom, addAlarmToRoomSuccess, addAlarmToRoomFailure,
+    addBookMarkToRoom, 
+    deleteBookMarkToRoom, 
+    addAlarmToRoom,
     deleteAlarmToRoom, 
 } = participantSlice.actions;
 
