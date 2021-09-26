@@ -1,10 +1,11 @@
 import { all, fork } from 'redux-saga/effects';
 
-import MessageSaga from './MessagaSaga.js';
-import ParticipantSaga from './ParticipantSaga.js';
-import RoomSaga from './RoomSaga.js';
-import UserSaga from './UserSaga.js';
+import participantSaga from './ParticipantSaga.js';
+import roomSaga from './RoomSaga.js';
 
 export default function* rootSaga() {
-    yield all([fork(RoomSaga)]);
+    yield all([
+        fork(roomSaga),
+        fork(participantSaga),
+    ]);
 }

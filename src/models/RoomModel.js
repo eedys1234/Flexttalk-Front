@@ -3,7 +3,7 @@ export default class RoomModel {
     constructor(room) {
 
         this.roomId = room.room_id || room.roomId;
-        this.messages = {
+        RoomModel.prototype.messages = {
             // requiredRoomName: '채팅방 이름은 필수값입니다.',
             requiredRoomType: '채팅방 Type을 필수값입니다.',
         };

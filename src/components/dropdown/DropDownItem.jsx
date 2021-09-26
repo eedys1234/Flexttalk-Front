@@ -1,14 +1,14 @@
 import { memo }from 'react';
 import styled from "styled-components";
 
-const DropDownItem = ({item, name, onClickRoom}) => {
+const DropDownItem = ({item, name, onClickItem, onClickFrontIC, onClickBackIC}) => {
 
     const { selected, count } = item;
     
     return(
         <StyledGroupBox
             selected={selected}
-            onClick={(e) => onClickRoom(e, item)}
+            onClick={(e) => onClickItem(e, item)}
         >
         <StyledGroupBoxText 
         >
@@ -25,11 +25,15 @@ const DropDownItem = ({item, name, onClickRoom}) => {
                 <StyledGroupBoxTextEllipseRight>{count}</StyledGroupBoxTextEllipseRight>
             </StyledGroupBoxTextEllipse>
         </StyledGroupBoxText>
-        <StyledBookMarkBtn>
+        <StyledBookMarkBtn
+            onClick={(e) => onClickFrontIC(e, item)}
+        >
             <StyledBookMarkIc/>
         </StyledBookMarkBtn>
         <StyledAlarmBox>
-            <StyledAlarmBtn>
+            <StyledAlarmBtn
+                onClick={(e) => onClickBackIC(e, item)}
+            >
                 <StyledAlarmIc />
             </StyledAlarmBtn>
         </StyledAlarmBox>

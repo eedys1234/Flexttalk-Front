@@ -45,14 +45,15 @@ export default class ParticipantApi {
     }
     
     //채팅방 알람 등록
-    static addAlaramToRoom = ({roomId, participantId}) => {
+    static addAlarmToRoom = ({roomId, participantId}) => {
         const url = `/api/v1/rooms/${roomId}/participants/${participantId}/alarm`;
         return post(`${url}`, {});
     }
     
     //채팅방 알람 삭제
-    static deleteAlarmToRoom = ({roomId, participantId}) => {
+    static deleteAlarmToRoom = ({ selectedRoom : { roomId } , participantId }) => {
         const url = `/api/v1/rooms/${roomId}/participants/${participantId}/alarm`;
+        console.log(url);
         return remove(`${url}`, {});
     }
 };

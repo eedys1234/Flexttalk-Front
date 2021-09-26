@@ -13,7 +13,7 @@ const HeaderContainer = () => {
 
     useEffect(() => {
         dispatch(types())
-    }, []);
+    }, [dispatch]);
 
 
     return (

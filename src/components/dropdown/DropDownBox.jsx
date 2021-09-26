@@ -2,7 +2,7 @@ import { memo, useCallback, useState } from 'react'
 import styled from "styled-components";
 import DropDownList from "./DropDownList";
 
-const DropDownBox = ({title = '', list = [], getName, getId, onClickRoom}) => {
+const DropDownBox = ({title = '', list = [], getName, getId, onClickItem, onClickFrontIC, onClickBackIC}) => {
 
     const [opened, setOpen] = useState(true);
     
@@ -27,7 +27,9 @@ const DropDownBox = ({title = '', list = [], getName, getId, onClickRoom}) => {
                     list={list}
                     getName={getName}
                     getId={getId}
-                    onClickRoom={onClickRoom}
+                    onClickItem={onClickItem}
+                    onClickFrontIC={onClickFrontIC}
+                    onClickBackIC={onClickBackIC}
                 >
                 </DropDownList>
             </StyledDropDownBox>

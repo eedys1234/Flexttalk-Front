@@ -2,7 +2,7 @@ import { memo } from 'react';
 import DropDownItem from './DropDownItem';
 import styled from 'styled-components';
 
-const DropDownList = ({opened, list, getName, getId, onClickRoom}) => {
+const DropDownList = ({opened, list, getName, getId, onClickItem, onClickFrontIC, onClickBackIC}) => {
     
     return(
         <StyledDropDownList
@@ -14,7 +14,9 @@ const DropDownList = ({opened, list, getName, getId, onClickRoom}) => {
                         key={getId ? getId(item) : item.id}
                         name={getName ? getName(item) : item.name}
                         item={item}
-                        onClickRoom={onClickRoom}
+                        onClickItem={onClickItem}
+                        onClickFrontIC={onClickFrontIC}
+                        onClickBackIC={onClickBackIC}
                     />
             )
         }

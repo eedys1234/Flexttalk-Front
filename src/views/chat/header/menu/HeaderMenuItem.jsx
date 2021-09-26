@@ -10,7 +10,7 @@ const HeaderMenuItem = ({roomType, roomTypeName, alarmCount = 0, selected}) => {
 
     const onClickMenu = useCallback(() => {
         dispatch(selectRoomType(roomType))
-    }, [roomType]);
+    }, [dispatch, roomType]);
 
     return (
         <StyledHeaderLi 

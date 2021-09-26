@@ -68,9 +68,10 @@ export const remove = _.pipe(
     addTokenDecorator,
     addUserIdDecorator,
     ({url}) => {
-    return new Promise((resolve, reject) => {
-        axios.delete(url)
-        .then(({ data, status }) => returnResult(status, data, resolve, reject));
-    });
-});
+        return new Promise((resolve, reject) => {
+            axios.delete(url)
+            .then(({ data, status }) => returnResult(status, data, resolve, reject));
+        });
+    }
+);
 
