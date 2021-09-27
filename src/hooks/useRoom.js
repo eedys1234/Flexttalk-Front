@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { list } from '../redux/reducers/RoomReducer';
+import { rooms } from '../redux/reducers/RoomReducer';
 
 const useRoom = (userId, roomType) => {
 
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(list())
+        dispatch(rooms())
     }, [userId, roomType]);
 }
 

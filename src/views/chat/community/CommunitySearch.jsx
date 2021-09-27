@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchRoom } from '../../../redux/reducers/RoomReducer';
 
-const CommunityHeader = () => {
+const CommunitySearch = () => {
 
     const { keyword } = useSelector(state => state.rooms);
     const dispatch = useDispatch();
@@ -16,22 +16,23 @@ const CommunityHeader = () => {
     }, [dispatch]);
 
     return(
-            <StyledCommunityHeader>
+            <StyledCommunitySearch>
                 <SearchBox 
                     keyword={keyword}
                     onChangeKeyword={onChangeKeyword}
                 />
-            </StyledCommunityHeader>
+            </StyledCommunitySearch>
     )
 };
 
-const StyledCommunityHeader = styled.div `
+const StyledCommunitySearch = styled.div `
     display: block;
     height: 48px;
     padding: 0 20px 0;
     line-height: 48px;
     background: #fff;
     border-radius: 5px;
+    margin-top: 9px;
 `
 
-export default CommunityHeader;
+export default CommunitySearch;

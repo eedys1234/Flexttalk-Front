@@ -1,15 +1,16 @@
 
 import { memo } from "react";
-
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const HeaderContentEtcItem = ({feature}) => {
 
     const { name, onClickItem } = feature;
+    const { selectedRoom } = useSelector(state => state.rooms);
 
     return (
         <StyledChatEtcLi
-            onClick={onClickItem}
+            onClick={(e) => onClickItem(e, selectedRoom)}
         >
             <StyledChatEtcBtn>
                  <span className="ic">{name}</span>

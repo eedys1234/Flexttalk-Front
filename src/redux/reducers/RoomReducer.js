@@ -49,30 +49,13 @@ const roomSlice = createSlice({
         create(state) {
         },
 
-        createSuccess(state, action) {
-            // state.rooms.concat(...action.payload);
-        },
-
-        createFailure(state) {
-            
-        },
-        
         remove(state) {
         },
 
-        removeSuccess(state, action) {
-            // state.rooms.filter(room => room.id !== action.payload)
+        rooms(state) {            
         },
 
-        removeFailure(state) {
-
-        },
-
-        list(state) {
-            
-        },
-
-        listSuccess(state, action) {
+        roomsSuccess(state, action) {
             
             const partitionRooms = _.go(
                 action.data,
@@ -95,12 +78,7 @@ const roomSlice = createSlice({
 
         },
 
-        listFailure(state) {
-
-        },
-
         types(state) {
-
         },
 
         typesSuccess(state, action) {
@@ -111,10 +89,6 @@ const roomSlice = createSlice({
                 ...state,
                 types,
             }
-        },
-
-        typesFailure(state) {
-
         },
 
         selectRoomType(state, action) {
@@ -189,10 +163,10 @@ const roomSlice = createSlice({
 })
 
 export const { 
-    create, createSuccess, createFailure, 
-    remove, removeSuccess, removeFailure, 
-    list, listSuccess, listFailure,
-    types, typesSuccess, typesFailure, 
+    create, createSuccess, 
+    remove, removeSuccess, 
+    rooms, roomsSuccess,
+    types, typesSuccess, 
     setAlarmToRoomSuccess, setBookMarkToRoomSuccess,
     selectRoom, selectRoomType, searchRoom
 } = roomSlice.actions;

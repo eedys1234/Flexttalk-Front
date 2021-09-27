@@ -7,43 +7,36 @@ export const createActions = (type) => () => {
     }
 } 
 
-export const createSaga = (actionCreateFunc, callApi, ...iter) => {
+export const createSaga = (actionCreateFunc, callApi, before, afterSuccess, afterFailure) => {
 
-    const { success, failure } = actionCreateFunc();
+    const { success } = actionCreateFunc();
     
     return function* (action) {
 
         try {
-            const { result } = yield call(callApi, action.payload);
-            yield put({ type: success, data: result })
-            
-            if(iter) {
-                for(const a of iter) {
+
+            if(before) {
+                for(const a of afterSuccess) {
                     yield put({ type: a.type, payload: action.payload});
                 }
             }
+
+            const { result } = yield call(callApi, action.payload);
+            yield put({ type: success, data: result })
+            
+            if(afterSuccess) {
+                for(const a of afterSuccess) {
+                    yield put({ type: a.type, payload: action.payload});
+                }
+            }
+            
         } catch(e) {
-            yield put({ type: failure, data: e.getResult() })
+
+            if(afterFailure) {
+                for(const a of afterFailure) {
+                    yield put({ type: a.type, data: e.getResult() })
+                }
+            }
         } 
     }
-} 
-
-// export const createSaga = (actionCreateFunc, callApi, ...actionType) => {
-
-//     const { success, failure } = actionCreateFunc();
-
-//     return function* (action) {
-
-//         try {
-//             const { result } = yield call(callApi, action.payload);
-//             yield put({ type: success, data: result });
-
-//             for(const a of actionType) {
-//                 yield put({ type: a.type, payload: action.payload});
-//             }
-//         }
-//         catch(e) {
-//             yield put({ type: failure, data: e.getResult() });
-//         }
-//     }
-// }
+}

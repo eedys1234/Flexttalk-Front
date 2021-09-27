@@ -1,17 +1,21 @@
 import { useCallback } from "react";
-import HeaderContenEtcList from "./HeaderContentEtcList";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import { roomEtcFeatureList } from '../../../../utils/RoomUtil';
+import HeaderContenEtcList from "./HeaderContentEtcList";
 import styled from "styled-components";
+import { participants } from "../../../../redux/reducers/ParticipantReducer";
 
 const HeaderContent = () => {
 
     const { selectedRoom } = useSelector(state => state.rooms);
     const { roomName } = selectedRoom || { roomName: ''};
 
-    const onClickParticipants = useCallback((e) => {
-        console.log('tag', 'onClickParticipants()');
-    }, [selectedRoom]);
+    const dispatch = useDispatch();
+    
+    const onClickParticipants = useCallback((e, selectedRoom) => {
+        dispatch(participants(selectedRoom));
+    }, [dispatch]);
 
     const onClickInvite = useCallback((e) => {
         console.log('tag', 'onClickInvite()');

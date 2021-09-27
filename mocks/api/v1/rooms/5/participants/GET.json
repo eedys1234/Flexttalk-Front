@@ -1,0 +1,33 @@
+{
+    "status": 200,
+    "result": [
+        {
+            "participant_id": 1,
+            "user_email": "test@gmail.com",
+            "user_profile": "",
+            "is_owner": false
+        },
+
+        {
+            "participant_id": 2,
+            "user_email": "test2@gmail.com",
+            "user_profile": "",
+            "is_owner": false
+        },
+
+        {
+            "participant_id": 3,
+            "user_email": "test3@gmail.com",
+            "user_profile": "",
+            "is_owner": false
+        },
+
+        {
+            "participant_id": 4,
+            "user_email": "test4@gmail.com",
+            "user_profile": "",
+            "is_owner": false
+        }
+
+    ]
+}

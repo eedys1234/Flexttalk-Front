@@ -1,39 +1,39 @@
 import { all, fork, takeLatest } from 'redux-saga/effects';
-
-import { create, remove, list, types, selectRoomType } from '../reducers/RoomReducer';
-import RoomApi from '../../api/RoomApi'
+import { create, remove, rooms, types, selectRoomType } from '../reducers/RoomReducer';
 import { createSaga, createActions } from '../../utils/SagaUtil';
-
-const createRoomActions = createActions(create.type);
-const createRoomRequest = createSaga(createRoomActions, RoomApi.createRoom);
-
-function* watchCreateRoom() {
-    yield takeLatest(create.type, createRoomRequest)
-}
+import { closing } from '../reducers/CmmnReducer';
+import RoomApi from '../../api/RoomApi'
 
 const typesActions = createActions(types.type);
-const typesRequest = createSaga(typesActions, RoomApi.types);
+const typesRequest = createSaga(typesActions, RoomApi.types, false, false, [closing]);
 
 function* watchTypes() {
     yield takeLatest(types.type, typesRequest);
 }
 
-const removeRoomActions = createActions(remove.type);
-const removeRoomRequest = createSaga(removeRoomActions, RoomApi.removeRoom);
+const createRoomActions = createActions(rooms.type);
+const createRoomRequest = createSaga(createRoomActions, RoomApi.createRoom, false, false, [closing]);
+
+function* watchCreateRoom() {
+    yield takeLatest(create.type, createRoomRequest)
+}
+
+const removeRoomActions = createActions(rooms.type);
+const removeRoomRequest = createSaga(removeRoomActions, RoomApi.removeRoom, false, false, [closing]);
 
 function* watchRemoveRoom() {
     yield takeLatest(remove.type, removeRoomRequest);
 }
 
-const listActions = createActions(list.type);
-const listRequest = createSaga(listActions, RoomApi.list);
+const roomsActions = createActions(rooms.type);
+const roomsRequest = createSaga(roomsActions, RoomApi.rooms, false, false, [closing]);
 
-function* watchList() {
-    yield takeLatest(list.type, listRequest);
+function* watchRooms() {
+    yield takeLatest(rooms.type, roomsRequest);
 }
 
-const selectRoomTypeActions = createActions(list.type);
-const selectRoomTypeRequest = createSaga(selectRoomTypeActions, RoomApi.list);
+const selectRoomTypeActions = createActions(rooms.type);
+const selectRoomTypeRequest = createSaga(selectRoomTypeActions, RoomApi.rooms, false, false, [closing]);
 
 function* watchSelectRoomType() {
     yield takeLatest(selectRoomType.type, selectRoomTypeRequest);
@@ -43,7 +43,7 @@ export default function* roomSaga() {
     yield all([
         fork(watchCreateRoom),
         fork(watchRemoveRoom),
-        fork(watchList),
+        fork(watchRooms),
         fork(watchTypes),
         fork(watchSelectRoomType),
     ])

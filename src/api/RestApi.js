@@ -29,7 +29,6 @@ const addTokenDecorator = (url, params) => {
 
 const addUserIdDecorator = ({url, params = {}}) => {
     if(params.hasOwnProperty('userId')) instance.defaults.headers.common.userId = params.userId;
-
     return { url, params };
 }
 

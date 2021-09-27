@@ -1,10 +1,11 @@
 
-import CommunityHeader from './CommunityHeader';
+import CommunitySearch from './CommunitySearch';
 import CommunityGroup from './CommunityGroup';
 
 import useRoom from '../../../hooks/useRoom';
 
 import styled from 'styled-components';
+import CommunityBtnBox from './CommunityBtnBox';
 
 const CommunitySnb = ({userId = 0}) => {
     const roomType = 'NORMAR';
@@ -13,7 +14,8 @@ const CommunitySnb = ({userId = 0}) => {
 
     return (
         <StyledCommunitySnb>
-            <CommunityHeader />
+            <CommunityBtnBox />
+            <CommunitySearch />
             <CommunityGroup />
         </StyledCommunitySnb>
     )
