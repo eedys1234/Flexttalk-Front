@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { create } from "../../../redux/reducers/RoomReducer";
@@ -9,8 +8,7 @@ const CommunityBtnBox = () => {
 
     return (
         <StyledCommunityBtnBox>
-            <StyledCommunityBtn
-            >
+            <StyledCommunityBtn>
                 <StyledCommunitySpan>채팅방 생성</StyledCommunitySpan>
             </StyledCommunityBtn>
         </StyledCommunityBtnBox>

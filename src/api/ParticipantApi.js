@@ -4,7 +4,6 @@ export default class ParticipantApi {
 
     //채팅방 참여자 리스트 가져오기
     static participants = ({roomId}) => {
-        console.log('roomId', roomId);
         const url = `/api/v1/rooms/${roomId}/participants`;
         return get(`${url}`);
     }

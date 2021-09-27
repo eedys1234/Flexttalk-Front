@@ -16,14 +16,14 @@ const cmmnSlice = createSlice({
     initialState,
     reducers: {
 
-        loader(state, action) {
+        loader(state) {
             return {
                 ...state,
                 loading: true,
             }
         },
 
-        closing(state, action) {
+        closing(state) {
             return {
                 ...state,
                 loading: false,

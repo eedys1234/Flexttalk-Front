@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { roomEtcFeatureList } from '../../../../utils/RoomUtil';
 import HeaderContenEtcList from "./HeaderContentEtcList";
 import styled from "styled-components";
-import { participants } from "../../../../redux/reducers/ParticipantReducer";
+import { deportParticipantPopupOpen, displayFilesPopupOpen, inviteParticipantPopupOpen, participantsPopupOpen } from "../../../../redux/reducers/CmmnReducer";
 
 const HeaderContent = () => {
 
@@ -14,24 +14,24 @@ const HeaderContent = () => {
     const dispatch = useDispatch();
     
     const onClickParticipants = useCallback((e, selectedRoom) => {
-        dispatch(participants(selectedRoom));
+        dispatch(participantsPopupOpen(selectedRoom));
     }, [dispatch]);
 
     const onClickInvite = useCallback((e) => {
-        console.log('tag', 'onClickInvite()');
-    }, [selectedRoom]);
+        dispatch(inviteParticipantPopupOpen());
+    }, [dispatch]);
 
-    const onClickDeport = useCallback((e) => {
-        console.log('tag', 'onClickDeport()');
-    }, [selectedRoom]);
+    const onClickDeport = useCallback((e, selectedRoom) => {
+        dispatch(deportParticipantPopupOpen(selectedRoom))
+    }, [dispatch]);
 
-    const onClickDisplayFiles = useCallback((e) => {
-        console.log('tag', 'onClickDisplayFiles()');
-    }, [selectedRoom]);
+    const onClickDisplayFiles = useCallback((e, selectedRoom) => {
+        dispatch(displayFilesPopupOpen(selectedRoom));
+    }, [dispatch]);
 
     const onClickSearchMessage = useCallback((e) => {
         console.log('tag', 'onClickSearchMessage()');
-    }, [selectedRoom]);
+    }, []);
 
     roomEtcFeatureList[0].onClickItem = roomEtcFeatureList[0].onClickItem || onClickParticipants;
     roomEtcFeatureList[1].onClickItem = roomEtcFeatureList[1].onClickItem || onClickInvite;

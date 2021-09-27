@@ -1,4 +1,4 @@
-import { all, fork, call, put, takeLatest } from 'redux-saga/effects'
+import { all, fork, takeLatest } from 'redux-saga/effects'
 import { addBookMarkToRoom, deleteBookMarkToRoom, addAlarmToRoom, deleteAlarmToRoom, participants } from '../reducers/ParticipantReducer';
 import { closing } from '../reducers/CmmnReducer';
 import { setBookMarkToRoomSuccess, setAlarmToRoomSuccess } from '../reducers/RoomReducer';

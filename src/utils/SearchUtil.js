@@ -34,7 +34,7 @@ export const kmp = function(sentence, pattern) {
 
         if(sentence.charAt(i) === pattern.charAt(j)) {
 
-            if(j == p-1) {
+            if(j === p-1) {
                 j = lps[j];
                 return true;
             }

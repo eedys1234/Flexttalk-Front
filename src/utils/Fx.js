@@ -41,7 +41,7 @@ const take = curry((l, iter) => {
         let res = [];
         for(const a of iter) {
             res.push(a);
-            if(l == res.length) return res;
+            if(l === res.length) return res;
         }
 
         return res;
@@ -69,7 +69,7 @@ const L_flatten = curry(function *(iter) {
     }
 });
 
-const L_flatMap = curry(function* (f, iter) {
+const L_flatMap = curry(function (f, iter) {
     return go(iter, 
         L_map(f),
         L_flatten)

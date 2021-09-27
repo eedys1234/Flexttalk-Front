@@ -8,7 +8,7 @@ const useRoom = (userId, roomType) => {
     
     useEffect(() => {
         dispatch(rooms())
-    }, [userId, roomType]);
+    }, [dispatch, userId, roomType]);
 }
 
 
