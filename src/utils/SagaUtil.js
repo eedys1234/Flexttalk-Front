@@ -31,7 +31,7 @@ export const createSaga = (actionCreateFunc, callApi, before, afterSuccess, afte
             }
             
         } catch(e) {
-
+            console.log(e);
             if(afterFailure) {
                 for(const a of afterFailure) {
                     yield put({ type: a.type, data: e.getResult() })

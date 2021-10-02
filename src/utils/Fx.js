@@ -1,6 +1,10 @@
 
 const curry = f => (a, ..._) => _.length > 1 ? f(a, ..._) : (..._) => f(a, ..._);
 
+const noop = () => {};
+
+const reduceF = (acc, a, f) => a instanceof Promise ? a.then(a => f(acc, a)) : f(acc, a);
+
 const reduce = (f, acc, iter) => {
         
         if(!iter) {
@@ -8,11 +12,15 @@ const reduce = (f, acc, iter) => {
             acc = iter.next().value;
         }
 
-        for(const a of iter) {
-            acc = f(acc, a);
-        }
+        return go1(acc, function recur(acc) {
+            
+            for(const a of iter) {
+                acc = reduceF(acc, a, f);
+                if(acc instanceof Promise) return acc.then(recur)
+            }
 
-        return acc;
+            return acc;
+        });
     };
 
 const go = (...args) => reduce((a, f) => f(a), args);
@@ -39,12 +47,23 @@ const filter = curry((f, iter) => {
     
 const take = curry((l, iter) => {
         let res = [];
-        for(const a of iter) {
-            res.push(a);
-            if(l === res.length) return res;
-        }
 
-        return res;
+        return (function recur() {
+
+            for(const a of iter) {
+                if(a instanceof Promise) {
+                    a.then(value => {
+                        res.push(value);
+                        return l == res.length ?  res : recur();
+                    })
+                }
+                res.push(a);
+                if(l === res.length) return res;
+            }
+    
+            return res;
+    
+        })();
     });
 
 const takeAll = curry(iter => take(Infinity, iter));
@@ -76,7 +95,6 @@ const L_flatMap = curry(function (f, iter) {
 });
 
 const L_map = curry(function* mapL(f, iter) {
-    
     for(const a of iter) {
         yield go1(a, f);
     }
@@ -98,6 +116,20 @@ const L_find = curry(function findL(f, iter) {
         )};
 })
 
+const catchNoop = arr => {
+    arr.forEach(p => p.catch(noop));    
+    return arr;
+}
+
+const C_reduce = curry((f, acc, iter) => {
+
+    const iter2 = catchNoop(iter ? [...iter] : [...acc]);
+    iter ? reduce(f, acc, iter2) : reduce(f, iter2)
+
+}); 
+
+const C_take = curry((l, iter) => take(l, catchNoop([...iter])) );
+
 export const _ = {
     reduce,
     go,
@@ -118,3 +150,9 @@ export const L = {
     flatten: L_flatten,
     flatMap: L_flatMap,
 };
+
+export const C = {
+    reduce: C_reduce,
+    take: C_take,
+};
+
