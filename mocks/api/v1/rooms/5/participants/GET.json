@@ -5,7 +5,7 @@
             "participant_id": 1,
             "user_email": "test@gmail.com",
             "user_profile": "",
-            "is_owner": false
+            "is_owner": true
         },
 
         {

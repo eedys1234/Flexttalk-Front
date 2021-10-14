@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import ParticipantModel from "../../models/ParticipantModel";
+import { L, _ } from "../../utils/Fx";
+import { kmp } from "../../utils/SearchUtil";
 
 const name = "participant";
 
 const initialState = {
-    participants: [],
+    orgParticipants: [],
+    searchParticipants: [],
     participantId: 0,
 }
 
@@ -28,14 +31,30 @@ const participantSlice = createSlice({
 
         participantsSuccess(state, action) {
 
-            const participants = action.data;
-            participants.map((participant) => new ParticipantModel(participant));
+            const orgParticipants = action.data.map((participant) => new ParticipantModel(participant));
      
             return {
                 ...state,
-                participants,
+                orgParticipants,
+                searchParticipants: orgParticipants,
             }
         },
+        
+        search(state, action) {
+            
+            const keyword = action.payload;
+            
+            const searchParticipants = _.go(
+                state.orgParticipants,
+                L.filter((participant) => kmp(participant.userEmail, keyword)),
+                _.take(10),
+            )
+
+            return {
+                ...state,
+                searchParticipants,
+            }
+        }, 
 
         addBookMarkToRoom(state, action) {
             action.payload = setParticipantInfo(state, action);
@@ -60,6 +79,7 @@ export const {
     participants, participantsSuccess, participantFailure,
     addBookMarkToRoom, deleteBookMarkToRoom, 
     addAlarmToRoom, deleteAlarmToRoom, 
+    search,
 } = participantSlice.actions;
 
 export default participantSlice;

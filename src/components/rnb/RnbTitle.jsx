@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
-const ParticipantsDlgTitle = () => {
+const RnbTitle = ({title, onClose}) => {
 
     return (
         <StyledTitleBx>
-            <StyledTitleText>참여자 리스트</StyledTitleText>
+            <StyledTitleText>{title}</StyledTitleText>
             <StyledCloseBx>
-                <StyledCloseBtn>
+                <StyledCloseBtn onClick={onClose}>
                     <StyledCloseIc>닫기</StyledCloseIc>
                 </StyledCloseBtn>
             </StyledCloseBx>
@@ -66,4 +66,4 @@ const StyledCloseIc = styled.span `
     background: url(https://static.wehago.com/imgs/common/sp_lux.png) 0 0 no-repeat;
 `
 
-export default ParticipantsDlgTitle;
+export default RnbTitle;

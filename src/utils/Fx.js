@@ -75,11 +75,34 @@ const partitionBy = curry((f, iter) => {
         , {}, iter);
 });
 
-const flatten = (iter) => go(iter,L_filter, takeAll)
+const flatten = (iter) => go(iter,L_filter, takeAll);
+
+const join = curry((sep) => reduce((a, b) => `${a}${sep}${b}`));
 
 const count = iter => iter.length; 
 
 const isIter = a => a && a[Symbol.iterator];
+
+const object = entries => go(
+    entries,
+    L_map(([k, v]) => ({[k]: v})),
+    reduce(Object.assign)
+);
+
+const mapObject = (f, obj) => go(
+    obj, 
+    L_entries,
+    L_map(([k, v]) => ({ [k]: f(v)})),
+    reduce(Object.assign)
+)
+
+const pick = (iter, obj) => go(
+    iter,
+    L_map(a => obj[a]),
+    L_entries,
+    L_filter(([k, v]) => (v !== undefined)),
+    object
+)
 
 const L_flatten = curry(function *(iter) {
     for(const a of iter) {
@@ -116,6 +139,24 @@ const L_find = curry(function findL(f, iter) {
         )};
 })
 
+const L_keys = function* (obj) {
+    for(const k in obj) {
+        yield k;
+    }
+}
+
+const L_values = function* (obj) {
+    for(const k in obj) {
+        yield obj[k];
+    }
+}
+
+const L_entries = function* (obj) {
+    for(const k in obj) {
+        yield [k, obj[k]];
+    }
+}
+
 const catchNoop = arr => {
     arr.forEach(p => p.catch(noop));    
     return arr;
@@ -149,6 +190,9 @@ export const L = {
     find: L_find,
     flatten: L_flatten,
     flatMap: L_flatMap,
+    keys: L_keys,
+    values: L_values,
+    entries: L_entries,
 };
 
 export const C = {

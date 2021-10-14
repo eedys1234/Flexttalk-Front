@@ -1,23 +1,22 @@
-import { useSelector } from 'react-redux';
-
 import styled from "styled-components";
 
-import ParticipantsDlgTitle from './ParticipantsDlgTitle';
-import ParticipantsDlgIn from './ParticipantsDlgIn';
+import RnbTitle from './RnbTitle';
+import RnbIn from './RnbIn';
 
-const ParticipantsDlg = () => {
-
-    const { participantsPopupView } = useSelector(state => state.cmmn);
+const Rnb = ({rnbView, rnbTitle, list, onChange, onClose}) => {
 
     return (
         <StyledRnb
-            view={participantsPopupView}
+            view={rnbView}
         >
-            <ParticipantsDlgTitle 
-            
+            <RnbTitle 
+                title={rnbTitle}
+                onClose={onClose}
             />
-            <ParticipantsDlgIn
-            ></ParticipantsDlgIn>
+            <RnbIn
+                list={list}
+                onChange={onChange}
+            />
         </StyledRnb>
     );
 }
@@ -38,4 +37,4 @@ const StyledRnb = styled.div `
     transition: right .25s;
 `
 
-export default ParticipantsDlg;
+export default Rnb;

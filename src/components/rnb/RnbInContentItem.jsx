@@ -1,8 +1,10 @@
 
 import styled from 'styled-components';
 
-const ParticipantsDlgItem = () => {
+const RnbInContentItem = ({item}) => {
 
+    const { name, email, isMark, isMarkText } = item;
+    
     return (
         <StyledContentItem>
             <StyledContentItemBtn>
@@ -10,12 +12,15 @@ const ParticipantsDlgItem = () => {
                     <StyledImageBx />
                 </StyledProfileBx>
                 <StyledProfileInfoBx>
-                    <StyledProfileName>이정환
-                        <StyledProfileMaster>마스터</StyledProfileMaster>
+                    <StyledProfileName>{name}
+                        {
+                            isMark && 
+                            <StyledProfileMaster>{isMarkText}</StyledProfileMaster>
+                        }
                     </StyledProfileName>
                     <div style={{maxWidth: '100%'}}>
                         <StyledProfileEmail>
-                            test@gmail.com
+                            {email}
                         </StyledProfileEmail>
                     </div>
                 </StyledProfileInfoBx>
@@ -133,4 +138,4 @@ const StyledProfileEmail = styled.span `
     padding-right: 70px;
 `
 
-export default ParticipantsDlgItem;
+export default RnbInContentItem;

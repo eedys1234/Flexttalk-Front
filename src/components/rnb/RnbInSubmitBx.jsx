@@ -1,11 +1,12 @@
 
 import styled from "styled-components";
 
-const ParticipantsDlgSubmitBx = () => {
+const RnbInSubmitBx = ({onChange}) => {
+
     return (
         <StyledSubmitBx>
             <StyledSearchBx>
-                <StyledSearchInput>
+                <StyledSearchInput onChange={onChange}>
                 </StyledSearchInput>
                 <StyledSearchBtn>
                     <svg focusable="false" viewBox="0 0 24 24" style={{display: 'inline-block', fill: 'rgb(28, 144, 251)', height: '14px', width: '16px', userSelect: 'none', textAlign: 'center', verticalAlign: 'middle', marginBottom: '2px'}}>
@@ -71,4 +72,4 @@ const StyledSearchBtn = styled.button `
     right: 0px;
 `
 
-export default ParticipantsDlgSubmitBx;
+export default RnbInSubmitBx;

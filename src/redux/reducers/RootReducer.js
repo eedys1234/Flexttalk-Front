@@ -6,5 +6,5 @@ import participantReducer from './ParticipantReducer';
 export const rootReducer = combineReducers({
     cmmn: cmmnReducer.reducer,
     rooms: roomReducer.reducer,
-    pariticipant: participantReducer.reducer,
+    pariticipants: participantReducer.reducer,
 });

@@ -2,12 +2,12 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { deportParticipantPopupClose } from '../../redux/reducers/CmmnReducer';
+import { participantsPopupClose } from '../../redux/reducers/CmmnReducer';
 import { search } from '../../redux/reducers/ParticipantReducer';
 
 import Rnb from "../../components/rnb/Rnb";
 
-const DeportParticipantDlg = () => {
+const ParticipantsDlg = () => {
 
     const dispatch = useDispatch();
 
@@ -17,10 +17,10 @@ const DeportParticipantDlg = () => {
     }, [dispatch]);
 
     const onClose = useCallback(() => {
-        dispatch(deportParticipantPopupClose());
+        dispatch(participantsPopupClose());
     }, [dispatch]);
 
-    const { deportParticipnatPopupView } = useSelector(state => state.cmmn);
+    const { participantsPopupView } = useSelector(state => state.cmmn);
     const { searchParticipants } = useSelector(state => state.pariticipants);
 
     const mapSearchParticipants = searchParticipants.map((participant) => ({
@@ -31,10 +31,9 @@ const DeportParticipantDlg = () => {
         isMarkText: '마스터',
     }));
 
-
     return (
         <Rnb 
-            rnbView={deportParticipnatPopupView}
+            rnbView={participantsPopupView}
             rnbTitle={'참여자 리스트'}
             list={mapSearchParticipants}
             onChange={onChange}
@@ -43,4 +42,4 @@ const DeportParticipantDlg = () => {
     );
 }
 
-export default DeportParticipantDlg;
+export default ParticipantsDlg;
